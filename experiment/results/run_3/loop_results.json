@@ -1,0 +1,304 @@
+[
+  {
+    "title_id": "t01",
+    "workflow": "loop",
+    "original": "Stainless Steel Insulated Water Bottle 32oz Blue",
+    "route": null,
+    "versions": [
+      "Insulated Stainless Steel Water Bottle Blue 32oz"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 11,
+        "failed_criteria": [],
+        "critique": "Move size (32oz) to the end after color for better adherence to the standard [product type] [attributes] [size] convention.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Insulated Stainless Steel Water Bottle Blue 32oz"
+  },
+  {
+    "title_id": "t02",
+    "workflow": "loop",
+    "original": "MENS RUNNING SHOES SIZE 10 BLACK MESH BREATHABLE",
+    "route": null,
+    "versions": [
+      "Men's Running Shoes Black Mesh Breathable Size 10"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 11,
+        "failed_criteria": [],
+        "critique": "Move the size attribute earlier or keep it consistent with a [product type][attributes][size] order for better structure.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Men's Running Shoes Black Mesh Breathable Size 10"
+  },
+  {
+    "title_id": "t03",
+    "workflow": "loop",
+    "original": "Ceramic Non-Stick Frying Pan 10 Inch with Lid",
+    "route": null,
+    "versions": [
+      "Frying Pan Ceramic Non-Stick with Lid 10 Inch"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 10,
+        "failed_criteria": [
+          "readability",
+          "consistency"
+        ],
+        "critique": "Reorder to 'Ceramic Non-Stick Frying Pan 10 Inch with Lid' so product type leads and attributes follow in a natural sequence.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Frying Pan Ceramic Non-Stick with Lid 10 Inch"
+  },
+  {
+    "title_id": "t04",
+    "workflow": "loop",
+    "original": "wireless bluetooth earbuds - charging case - 20 hour battery",
+    "route": null,
+    "versions": [
+      "Wireless Bluetooth Earbuds with Charging Case, 20 Hour Battery"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "No fix needed; the rewrite faithfully preserves all original attributes with improved readability.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Wireless Bluetooth Earbuds with Charging Case, 20 Hour Battery"
+  },
+  {
+    "title_id": "t05",
+    "workflow": "loop",
+    "original": "Bag 3pc Set Travel Polyester Carry Spinner 20in 24in 28in Navy",
+    "route": null,
+    "versions": [
+      "Travel Luggage Set Polyester Spinner Carry-On Navy 20in 24in 28in 3pc"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "The rewritten title is well-structured and accurate; no changes needed.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Travel Luggage Set Polyester Spinner Carry-On Navy 20in 24in 28in 3pc"
+  },
+  {
+    "title_id": "t06",
+    "workflow": "loop",
+    "original": "LED A19 E26 9W 5000K Daylight Dimmable 800lm 4 Pack",
+    "route": null,
+    "versions": [
+      "LED A19 Light Bulb E26 9W 5000K Daylight Dimmable 800lm - 4 Pack"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "The rewritten title is accurate and complete; adding 'Light Bulb' improves clarity with no further changes needed.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "LED A19 Light Bulb E26 9W 5000K Daylight Dimmable 800lm - 4 Pack"
+  },
+  {
+    "title_id": "t07",
+    "workflow": "loop",
+    "original": "Organic Cotton Crew Neck T Shirt Unisex Pre Shrunk Sizes S M L XL 2XL Multiple Colors Available Soft Comfortable Everyday Wear",
+    "route": null,
+    "versions": [
+      "Unisex Organic Cotton Crew Neck T-Shirt, Pre-Shrunk, Soft & Comfortable, Multiple Colors, Sizes S-2XL"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "No significant issues; the rewritten title retains all key attributes while improving readability and structure.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Unisex Organic Cotton Crew Neck T-Shirt, Pre-Shrunk, Soft & Comfortable, Multiple Colors, Sizes S-2XL"
+  },
+  {
+    "title_id": "t08",
+    "workflow": "loop",
+    "original": "Premium Quality Item - Model X200 - Fast Shipping",
+    "route": null,
+    "versions": [
+      "Model X200"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 1,
+          "attribute_preservation": 1,
+          "readability": 2,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 8,
+        "failed_criteria": [
+          "product_clarity",
+          "attribute_preservation",
+          "searchability",
+          "consistency"
+        ],
+        "critique": "The title needs a product type/category (e.g., what kind of item Model X200 is) since neither original nor rewritten title specifies it.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null
+  },
+  {
+    "title_id": "t09",
+    "workflow": "loop",
+    "original": "Replacement Part Compatible with Series 7 - Black",
+    "route": null,
+    "versions": [
+      "Replacement Part Compatible with Series 7 - Black"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 0,
+          "attribute_preservation": 1,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 6,
+        "failed_criteria": [
+          "product_clarity"
+        ],
+        "critique": "Specify what the actual product/part is (e.g., watch band, remote, filter) rather than only naming its compatibility and color.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null
+  },
+  {
+    "title_id": "t10",
+    "workflow": "loop",
+    "original": "2 Pack - Assorted - Standard Size",
+    "route": null,
+    "versions": [
+      "Assorted Standard Size - 2 Pack"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 0,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 7,
+        "failed_criteria": [
+          "product_clarity"
+        ],
+        "critique": "Neither title identifies the actual product type, so the core item name must be added before other fixes matter.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null
+  }
+]

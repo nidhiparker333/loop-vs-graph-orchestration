@@ -1,0 +1,82 @@
+[
+  {
+    "title_id": "t01",
+    "workflow": "graph",
+    "original": "Stainless Steel Insulated Water Bottle 32oz Blue",
+    "route": "MINOR",
+    "route_raw": "MINOR",
+    "route_fallback_used": false,
+    "route_reason": "Product is clearly identifiable; only word order/formatting could be improved.",
+    "versions": [
+      "Insulated Stainless Steel Water Bottle, Blue, 32oz"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 11,
+        "failed_criteria": [],
+        "critique": "Comma-separated attributes slightly break from the standard [product type] [attributes] [size] order, but no substantive issues exist.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Insulated Stainless Steel Water Bottle, Blue, 32oz"
+  },
+  {
+    "title_id": "t05",
+    "workflow": "graph",
+    "original": "Bag 3pc Set Travel Polyester Carry Spinner 20in 24in 28in Navy",
+    "route": "MAJOR",
+    "route_raw": "MAJOR",
+    "route_fallback_used": false,
+    "route_reason": "Product is identifiable as a 3-piece navy spinner luggage set but the word order needs restructuring for clarity.",
+    "versions": [
+      "Travel Bag Set Polyester Spinner Carry Navy 20in 24in 28in 3pc"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 11,
+        "failed_criteria": [
+          "consistency"
+        ],
+        "critique": "Move the '3pc' quantity next to the sizes or bag set descriptor so the title ends with size/quantity as per standard structure.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Travel Bag Set Polyester Spinner Carry Navy 20in 24in 28in 3pc"
+  },
+  {
+    "title_id": "t08",
+    "workflow": "graph",
+    "original": "Premium Quality Item - Model X200 - Fast Shipping",
+    "route": "UNCLEAR",
+    "route_raw": "UNCLEAR",
+    "route_fallback_used": false,
+    "route_reason": "The title lacks any specific product category or type, only a generic model number and filler phrases.",
+    "versions": [],
+    "evaluations": [],
+    "iterations": 0,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "title_id": "t01",
+    "workflow": "loop",
+    "original": "Stainless Steel Insulated Water Bottle 32oz Blue",
+    "route": null,
+    "versions": [
+      "Insulated Water Bottle Stainless Steel Blue 32oz"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 11,
+        "failed_criteria": [
+          "consistency"
+        ],
+        "critique": "Reorder to [product type] [material] [color] [size] pattern, e.g. 'Insulated Water Bottle Stainless Steel 32oz Blue', for better structure consistency.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Insulated Water Bottle Stainless Steel Blue 32oz"
+  },
+  {
+    "title_id": "t05",
+    "workflow": "loop",
+    "original": "Bag 3pc Set Travel Polyester Carry Spinner 20in 24in 28in Navy",
+    "route": null,
+    "versions": [
+      "Spinner Travel Bag Set Polyester Carry Navy 3pc - 20in 24in 28in"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 10,
+        "failed_criteria": [
+          "readability",
+          "consistency"
+        ],
+        "critique": "Reorder to place the 3pc quantity and sizes together at the end in a cleaner [product type] [attributes] [quantity/size] structure.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Spinner Travel Bag Set Polyester Carry Navy 3pc - 20in 24in 28in"
+  },
+  {
+    "title_id": "t08",
+    "workflow": "loop",
+    "original": "Premium Quality Item - Model X200 - Fast Shipping",
+    "route": null,
+    "versions": [
+      "Model X200"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 1,
+          "attribute_preservation": 1,
+          "readability": 2,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 8,
+        "failed_criteria": [
+          "product_clarity",
+          "attribute_preservation",
+          "searchability"
+        ],
+        "critique": "The title should specify what type of product 'Model X200' actually is, since neither the original nor rewritten title names the product category.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null
+  }
+]
