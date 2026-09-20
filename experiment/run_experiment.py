@@ -83,7 +83,23 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--runs", type=int, default=3)
     ap.add_argument("--smoke", action="store_true")
+    ap.add_argument(
+        "--pass-total",
+        type=int,
+        default=None,
+        help="Rubric total required to PASS. Condition A = 9, Condition B = 12.",
+    )
+    ap.add_argument(
+        "--condition",
+        default="a",
+        help="Condition label. 'a' writes to results/; anything else to results/condition_<x>/.",
+    )
     args = ap.parse_args()
+
+    if args.pass_total is not None:
+        shared.PASS_TOTAL = args.pass_total
+    base = RESULTS if args.condition == "a" else RESULTS / f"condition_{args.condition}"
+    print(f"condition={args.condition}  PASS_TOTAL={shared.PASS_TOTAL}/12  -> {base}")
 
     titles = load_titles()
     n_runs = args.runs
@@ -95,7 +111,7 @@ def main() -> int:
     labels = {t["id"]: t["intended_label"] for t in titles}
     clean = [strip_label(t) for t in titles]
 
-    RESULTS.mkdir(exist_ok=True)
+    base.mkdir(parents=True, exist_ok=True)
     per_run = []
 
     for run_id in range(1, n_runs + 1):
@@ -116,7 +132,7 @@ def main() -> int:
             results.append(gr)
 
         calls = list(shared.CALL_LOG)
-        out = RESULTS / (f"smoke_run_{run_id}" if args.smoke else f"run_{run_id}")
+        out = base / (f"smoke_run_{run_id}" if args.smoke else f"run_{run_id}")
         out.mkdir(exist_ok=True)
         for wf in WORKFLOWS:
             (out / f"{wf}_results.json").write_text(
@@ -135,15 +151,17 @@ def main() -> int:
         )
         print(f"  -> {out}")
 
-    write_comparison(per_run, labels, smoke=args.smoke)
+    write_comparison(per_run, labels, smoke=args.smoke, outdir=base, condition=args.condition)
     return 0
 
 
-def write_comparison(per_run: list[dict], labels: dict, smoke: bool) -> None:
+def write_comparison(
+    per_run: list[dict], labels: dict, smoke: bool, outdir: Path, condition: str
+) -> None:
     lines: list[str] = []
     w = lines.append
 
-    w("# Loop vs graph orchestration - measured results\n")
+    w(f"# Loop vs graph orchestration - measured results (Condition {condition.upper()})\n")
     w(f"- Model: `{shared.MODEL}`, thinking disabled, no temperature set (400 on this model)")
     w(f"- Runs: {len(per_run)}   Titles per run: {per_run[0]['summary']['loop']['titles']}")
     w(f"- Max rewrite attempts per title: {shared.MAX_REWRITE_ATTEMPTS}")
@@ -267,7 +285,7 @@ def write_comparison(per_run: list[dict], labels: dict, smoke: bool) -> None:
     w("Interpretation, limitations and the preregistered prediction: see")
     w("`PREREGISTRATION.md` and the README.")
 
-    path = RESULTS / ("smoke_comparison.md" if smoke else "comparison.md")
+    path = outdir / ("smoke_comparison.md" if smoke else "comparison.md")
     path.write_text("\n".join(lines), encoding="utf-8")
     print(f"\nwrote {path}")
 

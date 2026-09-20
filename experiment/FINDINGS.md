@@ -50,17 +50,16 @@ human anyway.
 
 It just lost that gain seven times over on the titles that did need work.
 
-## The structural asymmetry (the generalisable part)
-
-This is the part that isn't specific to product titles:
+## The structural asymmetry
 
 **The graph's cost is unconditional. Its saving is conditional.**
 
-Every single item pays the classify tax, up front, whether or not routing helps.
-Only *some* items — the ones routed away from work — pay it back. So the pattern
-is worth it exactly when enough inputs get routed away from work.
+Every item pays the classify tax, up front, whether or not routing helps. Only
+*some* items — the ones routed away from work — pay it back.
 
-From the measured per-title figures, the break-even point on this task:
+### Derived break-even — Condition A only
+
+From the measured per-title figures in this run:
 
 | | Break-even share of ambiguous inputs |
 |---|---|
@@ -71,10 +70,22 @@ From the measured per-title figures, the break-even point on this task:
 At 30% ambiguous inputs we were below the line, and the graph lost. Had the
 dataset been ~40% ambiguous, the token result would have flipped.
 
-That threshold is specific to this task and these prompts. The *shape* of the
-argument is not: pay a fixed cost on everything, recover it only on the subset
-you divert. A cheaper classifier, a more expensive rewrite, or a genuinely
-iterating loop all move the line.
+**This number is specific to Condition A and does not generalise.** It is a
+two-point extrapolation that assumes all of the following, every one of which
+was true only of this run:
+
+1. `claude-sonnet-5`, thinking disabled, these exact prompts.
+2. `PASS_TOTAL = 9/12`. A different quality bar changes the per-title costs on
+   both sides and therefore moves the line. (This is what Condition B tests.)
+3. **The loop performed exactly one rewrite attempt per title.** A loop that
+   iterates has a higher per-title cost, which moves the line in the graph's
+   favour. The figure above is the break-even for a loop that does not loop.
+4. Per-title costs scale linearly with the ambiguous share, and the three
+   categories behave as they did here.
+5. This dataset of 10 titles, whose difficulty distribution is a design choice.
+
+It is a description of one measured configuration, not a rule of thumb, and it
+should not be quoted without assumption 3 attached.
 
 ## Classifier accuracy, and a label I got wrong
 
