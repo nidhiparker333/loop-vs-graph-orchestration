@@ -1,0 +1,15 @@
+{
+  "_note": "intended_label is ground truth for post-hoc analysis ONLY. It is stripped before any model call and is never shown to either workflow.",
+  "titles": [
+    {"id": "t01", "intended_label": "MINOR",   "title": "Stainless Steel Insulated Water Bottle 32oz Blue"},
+    {"id": "t02", "intended_label": "MINOR",   "title": "MENS RUNNING SHOES SIZE 10 BLACK MESH BREATHABLE"},
+    {"id": "t03", "intended_label": "MINOR",   "title": "Ceramic Non-Stick Frying Pan 10 Inch with Lid"},
+    {"id": "t04", "intended_label": "MINOR",   "title": "wireless bluetooth earbuds - charging case - 20 hour battery"},
+    {"id": "t05", "intended_label": "MAJOR",   "title": "Bag 3pc Set Travel Polyester Carry Spinner 20in 24in 28in Navy"},
+    {"id": "t06", "intended_label": "MAJOR",   "title": "LED A19 E26 9W 5000K Daylight Dimmable 800lm 4 Pack"},
+    {"id": "t07", "intended_label": "MAJOR",   "title": "Organic Cotton Crew Neck T Shirt Unisex Pre Shrunk Sizes S M L XL 2XL Multiple Colors Available Soft Comfortable Everyday Wear"},
+    {"id": "t08", "intended_label": "UNCLEAR", "title": "Premium Quality Item - Model X200 - Fast Shipping"},
+    {"id": "t09", "intended_label": "UNCLEAR", "title": "Replacement Part Compatible with Series 7 - Black"},
+    {"id": "t10", "intended_label": "UNCLEAR", "title": "2 Pack - Assorted - Standard Size"}
+  ]
+}
