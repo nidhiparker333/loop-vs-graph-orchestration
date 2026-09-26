@@ -335,6 +335,32 @@ def write_comparison(
     )
     w(f"\nUnrecognised classifier labels needing the MAJOR fallback: {fallbacks}")
     w("")
+    w("### Cost-relevant accuracy: UNCLEAR vs not\n")
+    w("MINOR and MAJOR both cost 3 calls, so confusing them does not change cost.")
+    w("Only the UNCLEAR decision diverts work, so this is the split that matters")
+    w("for the token comparison.\n")
+    tp = fp = tn = fn = 0
+    for r in per_run:
+        for res in r["results"]:
+            if res["workflow"] != "graph":
+                continue
+            pred = res["route"] == "UNCLEAR"
+            act = labels.get(res["title_id"]) == "UNCLEAR"
+            tp += pred and act
+            fp += pred and not act
+            fn += (not pred) and act
+            tn += (not pred) and not act
+    n = tp + fp + fn + tn
+    if n:
+        w("| | routed UNCLEAR | routed to work |")
+        w("|---|---|---|")
+        w(f"| intended UNCLEAR | {tp} | {fn} |")
+        w(f"| intended MINOR/MAJOR | {fp} | {tn} |")
+        w(f"\nBinary accuracy: {(tp + tn)}/{n} ({(tp + tn) / n * 100:.1f}%)")
+        w(f"- Missed ambiguous (sent to a rewrite anyway): {fn}")
+        w(f"- Over-routed to human (work the loop did): {fp}"
+          " — inspect these; they inflate the graph's apparent saving.")
+    w("")
 
     # ---- complexity ----
     w("## Orchestration complexity\n")

@@ -1,0 +1,1213 @@
+[
+  {
+    "title_id": "t0001",
+    "workflow": "loop",
+    "original": "french PRESS stainless STEEL sand 4 level FILTER 6 QT",
+    "route": null,
+    "versions": [
+      "French Press Stainless Steel 4-Level Filter, 6 QT"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 1,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 11,
+        "failed_criteria": [
+          "attribute_preservation"
+        ],
+        "critique": "The word 'sand' (likely denoting a sand/beige color) was dropped from the original and should be restored if it refers to color.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "French Press Stainless Steel 4-Level Filter, 6 QT",
+    "model_calls": 2,
+    "input_tokens": 795,
+    "output_tokens": 178,
+    "total_tokens": 973,
+    "est_cost_usd": 0.00337,
+    "model_time_s": 3.53,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0002",
+    "workflow": "loop",
+    "original": "Trekking Poles Carbon Fiber Charcoal Shock Absorbing Collapsible 24\" - Sale",
+    "route": null,
+    "versions": [
+      "Trekking Poles Carbon Fiber Charcoal Shock Absorbing Collapsible 24\""
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "Removing the non-attribute 'Sale' tag correctly cleaned up the title with no further fixes needed.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Trekking Poles Carbon Fiber Charcoal Shock Absorbing Collapsible 24\"",
+    "model_calls": 2,
+    "input_tokens": 833,
+    "output_tokens": 177,
+    "total_tokens": 1010,
+    "est_cost_usd": 0.003436,
+    "model_time_s": 3.1,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0003",
+    "workflow": "loop",
+    "original": "Great for Travel Ideal for Home and Office Versatile Blackout Curtains Triple Weave Polyester Sand Grommet Top Extra Durable",
+    "route": null,
+    "versions": [
+      "Blackout Curtains - Triple Weave Polyester, Grommet Top, Sand, Extra Durable - Versatile for Home, Office, and Travel"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "Title is clear, well-structured, and fully grounded, though it could still be slightly tightened by moving size/quantity info if it existed.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Blackout Curtains - Triple Weave Polyester, Grommet Top, Sand, Extra Durable - Versatile for Home, Office, and Travel",
+    "model_calls": 2,
+    "input_tokens": 876,
+    "output_tokens": 201,
+    "total_tokens": 1077,
+    "est_cost_usd": 0.003762,
+    "model_time_s": 3.71,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0004",
+    "workflow": "loop",
+    "original": "Resistance Band Set, Natural Latex, Blush Pink, Door Anchor, Carry Bag",
+    "route": null,
+    "versions": [
+      "Resistance Band Set, Natural Latex, Blush Pink, with Door Anchor and Carry Bag"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "No fix needed; the rewrite retains all attributes and improves readability with natural connectors.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Resistance Band Set, Natural Latex, Blush Pink, with Door Anchor and Carry Bag",
+    "model_calls": 2,
+    "input_tokens": 826,
+    "output_tokens": 171,
+    "total_tokens": 997,
+    "est_cost_usd": 0.003362,
+    "model_time_s": 3.3,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0005",
+    "workflow": "loop",
+    "original": "French Press for home and travel use with Borosilicate Glass construction in Slate Grey featuring 4 Level Filter and Non Slip Base available in 10 Qt",
+    "route": null,
+    "versions": [
+      "French Press with Borosilicate Glass Construction, Slate Grey, 4 Level Filter, Non Slip Base, for Home and Travel Use - 10 Qt"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 11,
+        "failed_criteria": [
+          "consistency"
+        ],
+        "critique": "The 10 Qt capacity should be presented alongside or near the product type rather than isolated at the end after a dash, to better match a standard [product type][attributes][size] structure.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "French Press with Borosilicate Glass Construction, Slate Grey, 4 Level Filter, Non Slip Base, for Home and Travel Use - 10 Qt",
+    "model_calls": 2,
+    "input_tokens": 884,
+    "output_tokens": 222,
+    "total_tokens": 1106,
+    "est_cost_usd": 0.003988,
+    "model_time_s": 3.9,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0006",
+    "workflow": "loop",
+    "original": "New Part Compatible with Y22 - White - Standard Size",
+    "route": null,
+    "versions": [
+      "Replacement Part Compatible with Y22 - White - Standard Size"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 0,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 8,
+        "failed_criteria": [
+          "product_clarity"
+        ],
+        "critique": "Neither title specifies what the part actually is (e.g., its product type/name), so the core product remains unidentifiable and should be added.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 780,
+    "output_tokens": 176,
+    "total_tokens": 956,
+    "est_cost_usd": 0.00332,
+    "model_time_s": 3.52,
+    "review_decision": "human_review",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0007",
+    "workflow": "loop",
+    "original": "Shatterproof Acrylic Sand Plug In Warm White 24\" String Lights",
+    "route": null,
+    "versions": [
+      "String Lights, Shatterproof Acrylic Sand, Plug In, Warm White, 24\""
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 9,
+        "failed_criteria": [
+          "readability",
+          "searchability",
+          "consistency"
+        ],
+        "critique": "Restructure into a natural [product type] [key attributes] [size] order instead of a comma-separated attribute list, which reduces readability and search term flow.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "String Lights, Shatterproof Acrylic Sand, Plug In, Warm White, 24\"",
+    "model_calls": 2,
+    "input_tokens": 808,
+    "output_tokens": 198,
+    "total_tokens": 1006,
+    "est_cost_usd": 0.003596,
+    "model_time_s": 3.81,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0008",
+    "workflow": "loop",
+    "original": "Accessory for P600 Series - Original Size - Hot Item",
+    "route": null,
+    "versions": [
+      "Accessory for P600 Series - Original Size"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 0,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 7,
+        "failed_criteria": [
+          "product_clarity"
+        ],
+        "critique": "The title needs to specify what the accessory actually is (e.g., case, charger, screen protector) since 'Accessory' alone doesn't identify the product.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 774,
+    "output_tokens": 176,
+    "total_tokens": 950,
+    "est_cost_usd": 0.003308,
+    "model_time_s": 3.35,
+    "review_decision": "human_review",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0009",
+    "workflow": "loop",
+    "original": "Bolstered Plush Walnut Brown Non Skid Base 18\" Dog Bed",
+    "route": null,
+    "versions": [
+      "Dog Bed with Bolstered Plush Walnut Brown Design and Non-Skid Base, 18\""
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 11,
+        "failed_criteria": [
+          "consistency"
+        ],
+        "critique": "Size should be moved to the end and 'Design' wording tightened to follow the standard [product type] [attributes] [size] structure more closely.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Dog Bed with Bolstered Plush Walnut Brown Design and Non-Skid Base, 18\"",
+    "model_calls": 2,
+    "input_tokens": 816,
+    "output_tokens": 191,
+    "total_tokens": 1007,
+    "est_cost_usd": 0.003542,
+    "model_time_s": 3.59,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0010",
+    "workflow": "loop",
+    "original": "Yoga Mat Graphite Yoga Mat Natural Rubber Yoga Mat Carrying Strap Odor Free Non Slip",
+    "route": null,
+    "versions": [
+      "Yoga Mat - Natural Rubber, Graphite, Non-Slip, Odor Free, with Carrying Strap"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "No fix needed; the rewrite retains all attributes while improving readability.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Yoga Mat - Natural Rubber, Graphite, Non-Slip, Odor Free, with Carrying Strap",
+    "model_calls": 2,
+    "input_tokens": 857,
+    "output_tokens": 170,
+    "total_tokens": 1027,
+    "est_cost_usd": 0.003414,
+    "model_time_s": 3.12,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0011",
+    "workflow": "loop",
+    "original": "Comfortable Super Soft Professional Grade Over Ear Headphones Protein Leather Navy Noise Isolating Perfect for Everyday Use",
+    "route": null,
+    "versions": [
+      "Over Ear Headphones - Professional Grade, Super Soft Protein Leather, Noise Isolating, Navy"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 1,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 10,
+        "failed_criteria": [
+          "attribute_preservation"
+        ],
+        "critique": "Restore the 'Comfortable' and 'Perfect for Everyday Use' descriptors to preserve the original's use-case appeal.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Over Ear Headphones - Professional Grade, Super Soft Protein Leather, Noise Isolating, Navy",
+    "model_calls": 2,
+    "input_tokens": 861,
+    "output_tokens": 199,
+    "total_tokens": 1060,
+    "est_cost_usd": 0.003712,
+    "model_time_s": 3.28,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0012",
+    "workflow": "loop",
+    "original": "Accessory for Gen 4 Series - Mini - Sale",
+    "route": null,
+    "versions": [
+      "Accessory for Gen 4 Series - Mini"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 0,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 7,
+        "failed_criteria": [
+          "product_clarity"
+        ],
+        "critique": "The title needs to specify what the accessory actually is (e.g., case, strap, charger) since 'Accessory' alone doesn't identify the product.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 776,
+    "output_tokens": 176,
+    "total_tokens": 952,
+    "est_cost_usd": 0.003312,
+    "model_time_s": 3.31,
+    "review_decision": "human_review",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0013",
+    "workflow": "loop",
+    "original": "Cutting Board, Bamboo, Charcoal, Reversible, Juice Groove, 24\"",
+    "route": null,
+    "versions": [
+      "Bamboo Cutting Board, Charcoal, Reversible, Juice Groove, 24\""
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "No fix needed; the rewrite correctly leads with material and product type while preserving all attributes.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Bamboo Cutting Board, Charcoal, Reversible, Juice Groove, 24\"",
+    "model_calls": 2,
+    "input_tokens": 818,
+    "output_tokens": 168,
+    "total_tokens": 986,
+    "est_cost_usd": 0.003316,
+    "model_time_s": 2.6,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0014",
+    "workflow": "loop",
+    "original": "Luxury Super Soft Extra Durable Yoga Mat Cork Sky Blue Carrying Strap Perfect for Everyday Use",
+    "route": null,
+    "versions": [
+      "Yoga Mat Cork Sky Blue Extra Durable Super Soft with Carrying Strap",
+      "Yoga Mat Cork Sky Blue Luxury Super Soft Extra Durable with Carrying Strap Perfect for Everyday Use"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 1,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 8,
+        "failed_criteria": [
+          "attribute_preservation",
+          "readability",
+          "searchability",
+          "consistency"
+        ],
+        "critique": "Restore 'Luxury' and 'Perfect for Everyday Use' or similar usage context to preserve searchable descriptive terms and improve structural flow.",
+        "verdict": "REVISE"
+      },
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 10,
+        "failed_criteria": [
+          "readability",
+          "consistency"
+        ],
+        "critique": "Reorder to place product type and material/color before the stacked adjective string for smoother, more standard flow.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 2,
+    "outcome": "PASS",
+    "final_title": "Yoga Mat Cork Sky Blue Luxury Super Soft Extra Durable with Carrying Strap Perfect for Everyday Use",
+    "model_calls": 4,
+    "input_tokens": 1850,
+    "output_tokens": 409,
+    "total_tokens": 2259,
+    "est_cost_usd": 0.00779,
+    "model_time_s": 6.38,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0015",
+    "workflow": "loop",
+    "original": "DESK LAMP POWDER COATED STEEL SAGE GREEN TOUCH CONTROL DIMMABLE 7W SET OF 4",
+    "route": null,
+    "versions": [
+      "Desk Lamp, Powder Coated Steel, Sage Green, Touch Control, Dimmable, 7W - Set of 4"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "The rewrite is well-structured and faithful; no fixes needed.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Desk Lamp, Powder Coated Steel, Sage Green, Touch Control, Dimmable, 7W - Set of 4",
+    "model_calls": 2,
+    "input_tokens": 866,
+    "output_tokens": 172,
+    "total_tokens": 1038,
+    "est_cost_usd": 0.003452,
+    "model_time_s": 2.72,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0016",
+    "workflow": "loop",
+    "original": "Rain Jacket Lavender Rain Jacket Recycled Polyester Rain Jacket Waterproof",
+    "route": null,
+    "versions": [
+      "Rain Jacket - Lavender, Recycled Polyester, Waterproof"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "The rewritten title is concise, accurate, and retains all key attributes with no further changes needed.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Rain Jacket - Lavender, Recycled Polyester, Waterproof",
+    "model_calls": 2,
+    "input_tokens": 820,
+    "output_tokens": 162,
+    "total_tokens": 982,
+    "est_cost_usd": 0.00326,
+    "model_time_s": 2.64,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0017",
+    "workflow": "loop",
+    "original": "Ergonomic Office Chair Breathable Mesh Silver Tilt Lock - New Arrival",
+    "route": null,
+    "versions": [
+      "Office Chair - Ergonomic, Breathable Mesh, Silver, Tilt Lock",
+      "New Arrival Ergonomic Office Chair Breathable Mesh Silver Tilt Lock"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 1,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 8,
+        "failed_criteria": [
+          "attribute_preservation",
+          "consistency"
+        ],
+        "critique": "Restore the 'New Arrival' marketing cue and use a natural attribute order instead of comma-separated fragments after the dash.",
+        "verdict": "REVISE"
+      },
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 10,
+        "failed_criteria": [
+          "readability",
+          "consistency"
+        ],
+        "critique": "Move 'New Arrival' to the end so the product type leads the title for better structure and readability.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 2,
+    "outcome": "PASS",
+    "final_title": "New Arrival Ergonomic Office Chair Breathable Mesh Silver Tilt Lock",
+    "model_calls": 4,
+    "input_tokens": 1757,
+    "output_tokens": 369,
+    "total_tokens": 2126,
+    "est_cost_usd": 0.007204,
+    "model_time_s": 5.63,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0018",
+    "workflow": "loop",
+    "original": "Set of 4 - Assorted Blush Pink - Full Size - New",
+    "route": null,
+    "versions": [
+      "Assorted Blush Pink Set - Full Size - Pack of 4 - New"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 1,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 9,
+        "failed_criteria": [
+          "product_clarity",
+          "consistency"
+        ],
+        "critique": "The product type itself (e.g., sheets, pillowcases, towels) is never specified in either title, so it should be added to clarify what the item actually is.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 792,
+    "output_tokens": 191,
+    "total_tokens": 983,
+    "est_cost_usd": 0.003494,
+    "model_time_s": 3.06,
+    "review_decision": "human_review",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0019",
+    "workflow": "loop",
+    "original": "Carbon Fiber Charcoal Cork Grip 16\" Trekking Poles",
+    "route": null,
+    "versions": [
+      "Trekking Poles Carbon Fiber Charcoal Cork Grip 16\""
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 10,
+        "failed_criteria": [
+          "readability",
+          "consistency"
+        ],
+        "critique": "Move 'Trekking Poles' to the end (or keep product type first but reorder attributes) so it reads as [key attributes] [product type] [size] rather than leading awkwardly with the product type before its descriptors.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Trekking Poles Carbon Fiber Charcoal Cork Grip 16\"",
+    "model_calls": 2,
+    "input_tokens": 804,
+    "output_tokens": 205,
+    "total_tokens": 1009,
+    "est_cost_usd": 0.003658,
+    "model_time_s": 3.09,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0020",
+    "workflow": "loop",
+    "original": "Resistance Band Set Natural Latex Mustard Snap Resistant Mustard Natural Latex",
+    "route": null,
+    "versions": [
+      "Resistance Band Set Natural Latex Snap Resistant Mustard"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "The rewrite correctly removes the duplicated 'Mustard Natural Latex' phrase while retaining all key attributes, so no further fix is needed.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Resistance Band Set Natural Latex Snap Resistant Mustard",
+    "model_calls": 2,
+    "input_tokens": 812,
+    "output_tokens": 180,
+    "total_tokens": 992,
+    "est_cost_usd": 0.003424,
+    "model_time_s": 2.88,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0021",
+    "workflow": "loop",
+    "original": "Merino Wool Socks Merino Wool Blend Forest Green Cushioned Heel Moisture Wicking Seamless Toe XS 6 Pack - Free Delivery",
+    "route": null,
+    "versions": [
+      "Merino Wool Blend Socks - Forest Green, Cushioned Heel, Moisture Wicking, Seamless Toe - Size XS, 6 Pack"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "The rewrite is well-structured and accurate, though it drops the 'Free Delivery' note, which is a minor, non-attribute detail.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Merino Wool Blend Socks - Forest Green, Cushioned Heel, Moisture Wicking, Seamless Toe - Size XS, 6 Pack",
+    "model_calls": 2,
+    "input_tokens": 895,
+    "output_tokens": 206,
+    "total_tokens": 1101,
+    "est_cost_usd": 0.00385,
+    "model_time_s": 2.93,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0022",
+    "workflow": "loop",
+    "original": "Gel Pen Matte Barrel Slate Grey Smudge Resistant Quick Dry Ink 0.5mm Tip 2 Pack - Limited Stock",
+    "route": null,
+    "versions": [
+      "Gel Pen Matte Slate Grey Barrel Smudge Resistant Quick Dry Ink 0.5mm Tip - 2 Pack"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 1,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 11,
+        "failed_criteria": [
+          "attribute_preservation"
+        ],
+        "critique": "The rewrite drops the 'Limited Stock' urgency cue present in the original title.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Gel Pen Matte Slate Grey Barrel Smudge Resistant Quick Dry Ink 0.5mm Tip - 2 Pack",
+    "model_calls": 2,
+    "input_tokens": 885,
+    "output_tokens": 194,
+    "total_tokens": 1079,
+    "est_cost_usd": 0.00371,
+    "model_time_s": 2.91,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0023",
+    "workflow": "loop",
+    "original": "Cutting Board for home and travel use with Acacia Wood construction in Forest Green featuring Reversible available in 10\"",
+    "route": null,
+    "versions": [
+      "Reversible Acacia Wood Cutting Board, Forest Green, for Home and Travel Use - 10\""
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "Title is well-structured and accurate; no major fix needed, though moving size before use-case could slightly improve flow.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Reversible Acacia Wood Cutting Board, Forest Green, for Home and Travel Use - 10\"",
+    "model_calls": 2,
+    "input_tokens": 834,
+    "output_tokens": 178,
+    "total_tokens": 1012,
+    "est_cost_usd": 0.003448,
+    "model_time_s": 2.89,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0024",
+    "workflow": "loop",
+    "original": "Adjustable  Dumbbell   Cast Iron  Teal  Space Saving  Knurled Grip  5 lb",
+    "route": null,
+    "versions": [
+      "Adjustable Dumbbell, Cast Iron, Teal, Space Saving, Knurled Grip, 5 lb"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 11,
+        "failed_criteria": [],
+        "critique": "Reorder to a cleaner [product type] [key attributes] [size] structure, e.g. move weight and material closer to the front.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Adjustable Dumbbell, Cast Iron, Teal, Space Saving, Knurled Grip, 5 lb",
+    "model_calls": 2,
+    "input_tokens": 843,
+    "output_tokens": 188,
+    "total_tokens": 1031,
+    "est_cost_usd": 0.003566,
+    "model_time_s": 2.95,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0025",
+    "workflow": "loop",
+    "original": "Versatile Professional Grade Extra Durable Camping Tent Ripstop Polyester Mustard Mesh Vents Ideal for Home and Office",
+    "route": null,
+    "versions": [
+      "Camping Tent Ripstop Polyester Mustard Mesh Vents Professional Grade Extra Durable",
+      "Camping Tent Ripstop Polyester Mustard Mesh Vents Professional Grade Extra Durable Ideal for Home and Office"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 1,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 8,
+        "failed_criteria": [
+          "attribute_preservation",
+          "searchability",
+          "consistency"
+        ],
+        "critique": "Restore the dropped 'Ideal for Home and Office' use-case phrase to preserve searchable context and improve structural flow.",
+        "verdict": "REVISE"
+      },
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 10,
+        "failed_criteria": [
+          "readability",
+          "consistency"
+        ],
+        "critique": "Move descriptive qualifiers like 'Professional Grade Extra Durable' before the material/color details so the title reads more naturally as [product type][key attributes].",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 2,
+    "outcome": "PASS",
+    "final_title": "Camping Tent Ripstop Polyester Mustard Mesh Vents Professional Grade Extra Durable Ideal for Home and Office",
+    "model_calls": 4,
+    "input_tokens": 1853,
+    "output_tokens": 415,
+    "total_tokens": 2268,
+    "est_cost_usd": 0.007856,
+    "model_time_s": 6.19,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0026",
+    "workflow": "loop",
+    "original": "Freezer Safe Storage Container Set BPA Free Plastic Teal Stackable 12 Qt",
+    "route": null,
+    "versions": [
+      "Storage Container Set BPA Free Plastic Freezer Safe Stackable Teal 12 Qt"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 11,
+        "failed_criteria": [],
+        "critique": "Move the size/quantity (12 Qt) to the end and group attributes more logically for better adherence to standard title structure.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Storage Container Set BPA Free Plastic Freezer Safe Stackable Teal 12 Qt",
+    "model_calls": 2,
+    "input_tokens": 825,
+    "output_tokens": 179,
+    "total_tokens": 1004,
+    "est_cost_usd": 0.00344,
+    "model_time_s": 2.83,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0027",
+    "workflow": "loop",
+    "original": "usb C charging CABLE braided NYLON walnut BROWN reinforced CONNECTOR fast CHARGE 8\"",
+    "route": null,
+    "versions": [
+      "USB-C Charging Cable, Braided Nylon, Walnut Brown, Reinforced Connector, Fast Charge, 8\""
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "No fix needed; the rewrite cleanly formats all original attributes without adding or losing information.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "USB-C Charging Cable, Braided Nylon, Walnut Brown, Reinforced Connector, Fast Charge, 8\"",
+    "model_calls": 2,
+    "input_tokens": 849,
+    "output_tokens": 181,
+    "total_tokens": 1030,
+    "est_cost_usd": 0.003508,
+    "model_time_s": 2.88,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0028",
+    "workflow": "loop",
+    "original": "OEM Part Compatible with B24 - Forest Green - Original Size",
+    "route": null,
+    "versions": [
+      "OEM Part Compatible with B24 - Forest Green - Original Size"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 0,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 0,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 6,
+        "failed_criteria": [
+          "product_clarity",
+          "searchability"
+        ],
+        "critique": "The title needs an actual product type/name instead of the vague 'OEM Part Compatible with B24', since 'B24' does not identify what the item is.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 789,
+    "output_tokens": 186,
+    "total_tokens": 975,
+    "est_cost_usd": 0.003438,
+    "model_time_s": 2.87,
+    "review_decision": "human_review",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0029",
+    "workflow": "loop",
+    "original": "BLACKOUT CURTAINS TRIPLE WEAVE POLYESTER FOREST GREEN GROMMET TOP THERMAL INSULATED 5X8 FT",
+    "route": null,
+    "versions": [
+      "Blackout Curtains, Triple Weave Polyester, Forest Green, Grommet Top, Thermal Insulated, 5x8 FT"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "The rewrite simply adds punctuation for readability while preserving all original attributes, so no further fix is needed.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Blackout Curtains, Triple Weave Polyester, Forest Green, Grommet Top, Thermal Insulated, 5x8 FT",
+    "model_calls": 2,
+    "input_tokens": 892,
+    "output_tokens": 189,
+    "total_tokens": 1081,
+    "est_cost_usd": 0.003674,
+    "model_time_s": 3.82,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 11.9
+  },
+  {
+    "title_id": "t0030",
+    "workflow": "loop",
+    "original": "Universal Fit AV12 - Shatterproof Acrylic - OEM",
+    "route": null,
+    "versions": [
+      "AV12 Shatterproof Acrylic Universal Fit OEM"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 1,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 9,
+        "failed_criteria": [
+          "product_clarity",
+          "consistency"
+        ],
+        "critique": "Add an explicit product type (e.g., 'mirror' or 'lens') since 'AV12' alone doesn't clarify what the item is.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 793,
+    "output_tokens": 187,
+    "total_tokens": 980,
+    "est_cost_usd": 0.003456,
+    "model_time_s": 3.24,
+    "review_decision": "human_review",
+    "workflow_wall_s": 11.9
+  }
+]
