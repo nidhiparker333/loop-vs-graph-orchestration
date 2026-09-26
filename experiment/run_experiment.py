@@ -16,6 +16,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
+import audit
 import graph_workflow
 import loop_workflow
 import shared
@@ -210,6 +211,11 @@ def main() -> int:
 
         calls = list(shared.CALL_LOG)
         enrich(results, calls, wall)
+        audit_agg = audit.audit_results(results, labels)
+        for wf in WORKFLOWS:
+            a = audit_agg.get(wf, {})
+            print(f"  {wf} groundedness audit: {a.get('ungrounded', 0)}/{a.get('produced', 0)}"
+                  f" titles contain an invented word")
         out = base / (f"smoke_run_{run_id}" if args.smoke else f"run_{run_id}")
         out.mkdir(exist_ok=True)
         for wf in WORKFLOWS:
@@ -224,6 +230,7 @@ def main() -> int:
                 "run_id": run_id,
                 "results": results,
                 "calls": calls,
+                "audit": audit_agg,
                 "summary": {wf: summarise(calls, results, wf) for wf in WORKFLOWS},
             }
         )
@@ -361,6 +368,9 @@ def write_comparison(
         w(f"- Over-routed to human (work the loop did): {fp}"
           " — inspect these; they inflate the graph's apparent saving.")
     w("")
+
+    # ---- deterministic groundedness audit ----
+    lines.extend(audit.render(per_run[0].get("audit", {}), WORKFLOWS))
 
     # ---- complexity ----
     w("## Orchestration complexity\n")

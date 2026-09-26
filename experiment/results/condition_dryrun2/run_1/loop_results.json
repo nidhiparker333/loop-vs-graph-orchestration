@@ -1,0 +1,1194 @@
+[
+  {
+    "title_id": "t0001",
+    "workflow": "loop",
+    "original": "Set of 7 - Multi Purpose - Premium - Walnut Brown",
+    "route": null,
+    "versions": [
+      "Multi Purpose Premium Walnut Brown Set - Set of 7"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 0,
+          "attribute_preservation": 1,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 1,
+          "consistency": 1
+        },
+        "total": 5,
+        "failed_criteria": [
+          "product_clarity"
+        ],
+        "critique": "Neither title identifies what the actual product is (e.g. towels, containers, tools), so the core item type must be specified.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 794,
+    "output_tokens": 174,
+    "total_tokens": 968,
+    "est_cost_usd": 0.003328,
+    "model_time_s": 3.07,
+    "review_decision": "human_review",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0002",
+    "workflow": "loop",
+    "original": "Non Skid Base Dog Bed 24\" Removable Cover Bolstered Plush Midnight Blue",
+    "route": null,
+    "versions": [
+      "Bolstered Plush Dog Bed with Removable Cover, Non-Skid Base, Midnight Blue, 24\""
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "No major fix needed; title is clear, accurate, and well-structured.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Bolstered Plush Dog Bed with Removable Cover, Non-Skid Base, Midnight Blue, 24\"",
+    "model_calls": 2,
+    "input_tokens": 833,
+    "output_tokens": 169,
+    "total_tokens": 1002,
+    "est_cost_usd": 0.003356,
+    "model_time_s": 2.99,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0003",
+    "workflow": "loop",
+    "original": "Universal Fit N120 - Shatterproof Acrylic - Aftermarket",
+    "route": null,
+    "versions": [
+      "Aftermarket Acrylic Shatterproof Lens - Universal Fit N120"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 1,
+          "consistency": 2
+        },
+        "total": 11,
+        "failed_criteria": [
+          "groundedness"
+        ],
+        "critique": "The word 'Lens' is introduced without support from the original title, which never specifies the product type.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 802,
+    "output_tokens": 166,
+    "total_tokens": 968,
+    "est_cost_usd": 0.003264,
+    "model_time_s": 3.31,
+    "review_decision": "human_review",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0004",
+    "workflow": "loop",
+    "original": "Accessory for F250 Series - Compact - New Arrival",
+    "route": null,
+    "versions": [
+      "F250 Series Accessory - New Arrival - Compact"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 1,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 10,
+        "failed_criteria": [
+          "product_clarity"
+        ],
+        "critique": "The specific product type (e.g., mat, cover, rack) is still missing, so 'Accessory' remains vague even though attributes are preserved.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 776,
+    "output_tokens": 177,
+    "total_tokens": 953,
+    "est_cost_usd": 0.003322,
+    "model_time_s": 3.13,
+    "review_decision": "human_review",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0005",
+    "workflow": "loop",
+    "original": "Desk Lamp Powder Coated Steel Slate Grey Adjustable Arm Eye Caring Dimmable 5W - Limited Stock",
+    "route": null,
+    "versions": [
+      "Desk Lamp - Powder Coated Steel, Slate Grey, Adjustable Arm, Eye Caring, Dimmable - 5W"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 1,
+          "readability": 2,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 10,
+        "failed_criteria": [
+          "attribute_preservation",
+          "searchability"
+        ],
+        "critique": "The rewrite dropped the 'Limited Stock' urgency cue from the original, slightly reducing searchability for stock-related queries.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Desk Lamp - Powder Coated Steel, Slate Grey, Adjustable Arm, Eye Caring, Dimmable - 5W",
+    "model_calls": 2,
+    "input_tokens": 869,
+    "output_tokens": 211,
+    "total_tokens": 1080,
+    "est_cost_usd": 0.003848,
+    "model_time_s": 3.33,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0006",
+    "workflow": "loop",
+    "original": "Travel Tumbler Sky Blue Travel Tumbler Stainless Steel Travel Tumbler Vacuum Sealed Cup Holder Friendly",
+    "route": null,
+    "versions": [
+      "Travel Tumbler - Sky Blue, Stainless Steel, Vacuum Sealed, Cup Holder Friendly"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 10,
+        "failed_criteria": [
+          "searchability",
+          "consistency"
+        ],
+        "critique": "Repeated keyword 'Travel Tumbler' from the original was removed, slightly reducing redundant search term coverage, though the comma-separated format still reads clearly.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Travel Tumbler - Sky Blue, Stainless Steel, Vacuum Sealed, Cup Holder Friendly",
+    "model_calls": 2,
+    "input_tokens": 873,
+    "output_tokens": 214,
+    "total_tokens": 1087,
+    "est_cost_usd": 0.003886,
+    "model_time_s": 3.71,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0007",
+    "workflow": "loop",
+    "original": "string lights shatterproof acrylic walnut brown plug in 50 ft",
+    "route": null,
+    "versions": [
+      "String Lights, Shatterproof Acrylic, Walnut Brown, Plug-In, 50 ft"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "The rewritten title is accurate and well-structured; no further fixes needed.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "String Lights, Shatterproof Acrylic, Walnut Brown, Plug-In, 50 ft",
+    "model_calls": 2,
+    "input_tokens": 803,
+    "output_tokens": 165,
+    "total_tokens": 968,
+    "est_cost_usd": 0.003256,
+    "model_time_s": 2.87,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0008",
+    "workflow": "loop",
+    "original": "Set of 2 Copper Powder Coated Steel 24W Dimmable Desk Lamp Touch Control",
+    "route": null,
+    "versions": [
+      "Desk Lamp Copper Powder Coated Steel 24W Dimmable Touch Control Set of 2"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 10,
+        "failed_criteria": [
+          "consistency"
+        ],
+        "critique": "Move 'Set of 2' to the end after all attributes, or better, keep quantity near product type for clearer structure.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Desk Lamp Copper Powder Coated Steel 24W Dimmable Touch Control Set of 2",
+    "model_calls": 2,
+    "input_tokens": 830,
+    "output_tokens": 184,
+    "total_tokens": 1014,
+    "est_cost_usd": 0.0035,
+    "model_time_s": 3.13,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0009",
+    "workflow": "loop",
+    "original": "Heavy Duty Deluxe Perfect for Everyday Use Throw Pillow Cover Velvet Terracotta Hidden Zipper Premium",
+    "route": null,
+    "versions": [
+      "Velvet Throw Pillow Cover - Terracotta, Heavy Duty, Deluxe, Hidden Zipper, Premium"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "Title is well-structured and fully grounded; no changes needed.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Velvet Throw Pillow Cover - Terracotta, Heavy Duty, Deluxe, Hidden Zipper, Premium",
+    "model_calls": 2,
+    "input_tokens": 870,
+    "output_tokens": 165,
+    "total_tokens": 1035,
+    "est_cost_usd": 0.00339,
+    "model_time_s": 2.84,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0010",
+    "workflow": "loop",
+    "original": "crew NECK t SHIRT tri BLEND terracotta TAGLESS soft HAND feel XS",
+    "route": null,
+    "versions": [
+      "Crew Neck T-Shirt Tri-Blend Terracotta Tagless Soft Hand Feel Size XS"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "Title is well-capitalized, retains all attributes, and follows a clear structure with no further fixes needed.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Crew Neck T-Shirt Tri-Blend Terracotta Tagless Soft Hand Feel Size XS",
+    "model_calls": 2,
+    "input_tokens": 830,
+    "output_tokens": 180,
+    "total_tokens": 1010,
+    "est_cost_usd": 0.00346,
+    "model_time_s": 2.94,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0011",
+    "workflow": "loop",
+    "original": "Bluetooth Speaker Fabric Wrapped Charcoal 12 Hour Playtime IPX7 Waterproof Deep Bass 6 Pack - Fast Shipping",
+    "route": null,
+    "versions": [
+      "Bluetooth Speaker Fabric Wrapped Charcoal IPX7 Waterproof Deep Bass 12 Hour Playtime - 6 Pack"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "Dropping 'Fast Shipping' is appropriate since it's not a product attribute, and the rewrite otherwise preserves all key information with improved structure.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Bluetooth Speaker Fabric Wrapped Charcoal IPX7 Waterproof Deep Bass 12 Hour Playtime - 6 Pack",
+    "model_calls": 2,
+    "input_tokens": 902,
+    "output_tokens": 213,
+    "total_tokens": 1115,
+    "est_cost_usd": 0.003934,
+    "model_time_s": 2.9,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0012",
+    "workflow": "loop",
+    "original": "Storage Container Set Borosilicate Glass Ivory Freezer Safe Stackable Airtight 4 Qt Ivory Borosilicate Glass",
+    "route": null,
+    "versions": [
+      "Storage Container Set Borosilicate Glass Ivory Freezer Safe Stackable Airtight 4 Qt"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "The rewrite correctly removes the redundant repeated 'Ivory Borosilicate Glass' phrase while retaining all key attributes.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Storage Container Set Borosilicate Glass Ivory Freezer Safe Stackable Airtight 4 Qt",
+    "model_calls": 2,
+    "input_tokens": 866,
+    "output_tokens": 192,
+    "total_tokens": 1058,
+    "est_cost_usd": 0.003652,
+    "model_time_s": 2.77,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0013",
+    "workflow": "loop",
+    "original": "3 Pack - Assorted Midnight Blue - Original Size - New",
+    "route": null,
+    "versions": [
+      "Assorted Midnight Blue Original Size - 3 Pack"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 0,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 7,
+        "failed_criteria": [
+          "product_clarity"
+        ],
+        "critique": "Neither title identifies the actual product type, making it unclear what item is being sold despite retaining color, size, and quantity attributes.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 787,
+    "output_tokens": 175,
+    "total_tokens": 962,
+    "est_cost_usd": 0.003324,
+    "model_time_s": 2.95,
+    "review_decision": "human_review",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0014",
+    "workflow": "loop",
+    "original": "Navy Compact - Replacement - G33",
+    "route": null,
+    "versions": [
+      "Compact Replacement - Navy - G33"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 1,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 8,
+        "failed_criteria": [
+          "product_clarity",
+          "consistency"
+        ],
+        "critique": "The title lacks a specific product noun (e.g., what 'compact' refers to, such as a compact mirror or case), leaving the core item ambiguous.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 759,
+    "output_tokens": 180,
+    "total_tokens": 939,
+    "est_cost_usd": 0.003318,
+    "model_time_s": 3.32,
+    "review_decision": "human_review",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0015",
+    "workflow": "loop",
+    "original": "Merino Wool Socks, Merino Wool Blend, Forest Green, Cushioned Heel, Moisture Wicking, Seamless Toe, XS, 6 Pack",
+    "route": null,
+    "versions": [
+      "Merino Wool Blend Socks, Forest Green, Cushioned Heel, Moisture Wicking, Seamless Toe, Size XS, 6 Pack"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "The rewritten title merges the redundant 'Merino Wool Socks' and 'Merino Wool Blend' into a single concise term without losing information.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Merino Wool Blend Socks, Forest Green, Cushioned Heel, Moisture Wicking, Seamless Toe, Size XS, 6 Pack",
+    "model_calls": 2,
+    "input_tokens": 895,
+    "output_tokens": 209,
+    "total_tokens": 1104,
+    "est_cost_usd": 0.00388,
+    "model_time_s": 2.81,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0016",
+    "workflow": "loop",
+    "original": "CK Damascus Pattern Steel Cream Razo Full Chef Knife",
+    "route": null,
+    "versions": [
+      "Chef Knife CK Damascus Pattern Steel Cream Razo, Full Size"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 1,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 9,
+        "failed_criteria": [
+          "product_clarity",
+          "readability",
+          "consistency"
+        ],
+        "critique": "The garbled phrase 'Cream Razo' and awkward word order should be clarified or reordered into a coherent [product type][attributes][size] structure.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Chef Knife CK Damascus Pattern Steel Cream Razo, Full Size",
+    "model_calls": 2,
+    "input_tokens": 801,
+    "output_tokens": 198,
+    "total_tokens": 999,
+    "est_cost_usd": 0.003582,
+    "model_time_s": 3.22,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0017",
+    "workflow": "loop",
+    "original": "Power Bank Aluminum Shell Black Pass Through Charging 20000mAh Dual Port Black Aluminum Shell",
+    "route": null,
+    "versions": [
+      "Power Bank Aluminum Shell Black Dual Port Pass Through Charging 20000mAh"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "The rewrite correctly removes the redundant duplicate 'Black Aluminum Shell' phrase while preserving all key attributes.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Power Bank Aluminum Shell Black Dual Port Pass Through Charging 20000mAh",
+    "model_calls": 2,
+    "input_tokens": 839,
+    "output_tokens": 183,
+    "total_tokens": 1022,
+    "est_cost_usd": 0.003508,
+    "model_time_s": 2.6,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0018",
+    "workflow": "loop",
+    "original": "7 Pack - Assorted White - Full Size - Bulk",
+    "route": null,
+    "versions": [
+      "Assorted White Bulk Pack - Full Size - 7 Pack"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 1,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 8,
+        "failed_criteria": [
+          "product_clarity",
+          "consistency"
+        ],
+        "critique": "The title lacks a concrete product noun (e.g., sheets, towels, napkins), leaving the actual item unidentified.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 783,
+    "output_tokens": 181,
+    "total_tokens": 964,
+    "est_cost_usd": 0.003376,
+    "model_time_s": 2.92,
+    "review_decision": "human_review",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0019",
+    "workflow": "loop",
+    "original": "Silver 16\" - Open Box - PT-8",
+    "route": null,
+    "versions": [
+      "PT-8 Silver Open Box 16\""
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 1,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 9,
+        "failed_criteria": [
+          "product_clarity"
+        ],
+        "critique": "The product type behind the model code 'PT-8' is never specified, so the item category remains unclear.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 764,
+    "output_tokens": 162,
+    "total_tokens": 926,
+    "est_cost_usd": 0.003148,
+    "model_time_s": 2.88,
+    "review_decision": "human_review",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0020",
+    "workflow": "loop",
+    "original": "slip on sneakers recycled knit graphite memory foam insole machine washable size 12 set of 4",
+    "route": null,
+    "versions": [
+      "Slip-On Sneakers, Recycled Knit, Graphite, Memory Foam Insole, Machine Washable, Size 12, Set of 4"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "The rewrite is accurate and well-formatted; adding punctuation only improves readability without changing content.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Slip-On Sneakers, Recycled Knit, Graphite, Memory Foam Insole, Machine Washable, Size 12, Set of 4",
+    "model_calls": 2,
+    "input_tokens": 834,
+    "output_tokens": 188,
+    "total_tokens": 1022,
+    "est_cost_usd": 0.003548,
+    "model_time_s": 2.83,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0021",
+    "workflow": "loop",
+    "original": "Camping Tent White Camping Tent Ripstop Polyester Camping Tent Quick Pitch Mesh Vents Waterproof Fly",
+    "route": null,
+    "versions": [
+      "Camping Tent - White, Ripstop Polyester, Quick Pitch, Mesh Vents, Waterproof Fly"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 10,
+        "failed_criteria": [
+          "searchability",
+          "consistency"
+        ],
+        "critique": "Removing the redundant repetitions of 'Camping Tent' slightly reduces keyword density, so consider a structured format like 'Camping Tent - White Ripstop Polyester, Quick Pitch, Mesh Vents, Waterproof Fly' to balance searchability and consistency.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Camping Tent - White, Ripstop Polyester, Quick Pitch, Mesh Vents, Waterproof Fly",
+    "model_calls": 2,
+    "input_tokens": 860,
+    "output_tokens": 254,
+    "total_tokens": 1114,
+    "est_cost_usd": 0.00426,
+    "model_time_s": 3.46,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0022",
+    "workflow": "loop",
+    "original": "Factory Sealed Part Compatible with B24 - Slate Grey - One Size",
+    "route": null,
+    "versions": [
+      "Replacement Part Compatible with B24 - Slate Grey - Factory Sealed - One Size"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 1,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 9,
+        "failed_criteria": [
+          "product_clarity"
+        ],
+        "critique": "The title should specify what the part actually is (e.g., its function or type) rather than the generic term 'Part', since neither the original nor rewritten title identifies the actual product.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 806,
+    "output_tokens": 198,
+    "total_tokens": 1004,
+    "est_cost_usd": 0.003592,
+    "model_time_s": 3.25,
+    "review_decision": "human_review",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0023",
+    "workflow": "loop",
+    "original": "Professional Grade Premium Extra Durable Cutting Board Acacia Wood Graphite Juice Groove Knife Friendly Luxury",
+    "route": null,
+    "versions": [
+      "Acacia Wood Cutting Board with Juice Groove - Graphite, Knife Friendly, Extra Durable"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 1,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 11,
+        "failed_criteria": [
+          "attribute_preservation"
+        ],
+        "critique": "The rewrite dropped 'Professional Grade/Premium/Luxury' descriptors, losing some marketing emphasis present in the original.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Acacia Wood Cutting Board with Juice Groove - Graphite, Knife Friendly, Extra Durable",
+    "model_calls": 2,
+    "input_tokens": 855,
+    "output_tokens": 200,
+    "total_tokens": 1055,
+    "est_cost_usd": 0.00371,
+    "model_time_s": 3.07,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0024",
+    "workflow": "loop",
+    "original": "6 Pack - Assorted Copper - Large - New",
+    "route": null,
+    "versions": [
+      "Assorted Copper Product - Large - 6 Pack"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 0,
+          "attribute_preservation": 1,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 1,
+          "consistency": 1
+        },
+        "total": 5,
+        "failed_criteria": [
+          "product_clarity"
+        ],
+        "critique": "The word 'Product' is a meaningless placeholder\u2014the actual product type (e.g., wire, pipe, fitting) is never specified in either title, so it should be replaced with the real item name.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 772,
+    "output_tokens": 191,
+    "total_tokens": 963,
+    "est_cost_usd": 0.003454,
+    "model_time_s": 2.99,
+    "review_decision": "human_review",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0025",
+    "workflow": "loop",
+    "original": "Yoga Mat, TPE Foam, Terracotta, 6mm Thick, Non Slip, 74\"",
+    "route": null,
+    "versions": [
+      "Yoga Mat, TPE Foam, Non Slip, Terracotta, 6mm Thick, 74\""
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 11,
+        "failed_criteria": [],
+        "critique": "Reordering attributes slightly disrupts the natural color-before-feature flow, but no information is lost or invented.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Yoga Mat, TPE Foam, Non Slip, Terracotta, 6mm Thick, 74\"",
+    "model_calls": 2,
+    "input_tokens": 831,
+    "output_tokens": 179,
+    "total_tokens": 1010,
+    "est_cost_usd": 0.003452,
+    "model_time_s": 2.94,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0026",
+    "workflow": "loop",
+    "original": "LB Frosted Glass Forest Green 2700 LED Bulb",
+    "route": null,
+    "versions": [
+      "LED Bulb, Frosted Glass, Forest Green, 2700K",
+      "LED Bulb, LB, Frosted Glass, Forest Green, 2700",
+      "LED Bulb LB Frosted Glass Forest Green 2700K"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 1,
+          "readability": 2,
+          "searchability": 1,
+          "groundedness": 1,
+          "consistency": 1
+        },
+        "total": 8,
+        "failed_criteria": [
+          "attribute_preservation",
+          "groundedness",
+          "consistency"
+        ],
+        "critique": "The 'LB' brand/model code was dropped and '2700' was changed to '2700K', an unverified assumption about units not explicitly stated in the original.",
+        "verdict": "REVISE"
+      },
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 1,
+          "searchability": 1,
+          "groundedness": 1,
+          "consistency": 1
+        },
+        "total": 8,
+        "failed_criteria": [
+          "readability",
+          "groundedness",
+          "consistency"
+        ],
+        "critique": "The comma-separated list format is awkward and drops the 'LED' unit/context for '2700', so it should be restructured as 'LED Bulb, LB, Frosted Glass, Forest Green, 2700K' following a natural [product type] [attributes] order.",
+        "verdict": "REVISE"
+      },
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 1,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 1,
+          "consistency": 2
+        },
+        "total": 10,
+        "failed_criteria": [
+          "attribute_preservation",
+          "groundedness"
+        ],
+        "critique": "The '2700K' likely represents color temperature but dropping the original's implicit 'LED' unit label ambiguity aside, ensure 'K' addition is verified as color temperature rather than assumed.",
+        "verdict": "REVISE"
+      }
+    ],
+    "iterations": 3,
+    "outcome": "FAIL_CAP",
+    "final_title": "LED Bulb LB Frosted Glass Forest Green 2700K",
+    "model_calls": 6,
+    "input_tokens": 2643,
+    "output_tokens": 636,
+    "total_tokens": 3279,
+    "est_cost_usd": 0.011646,
+    "model_time_s": 10.19,
+    "review_decision": "needs_attention",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0027",
+    "workflow": "loop",
+    "original": "Camping  Tent   Ripstop Polyester  Silver  4 Person",
+    "route": null,
+    "versions": [
+      "Camping Tent Ripstop Polyester Silver 4 Person"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "The rewritten title is already clean and well-structured; no further fixes needed.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Camping Tent Ripstop Polyester Silver 4 Person",
+    "model_calls": 2,
+    "input_tokens": 792,
+    "output_tokens": 152,
+    "total_tokens": 944,
+    "est_cost_usd": 0.003104,
+    "model_time_s": 2.92,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0028",
+    "workflow": "loop",
+    "original": "Accessory for Model 22 Series - Standard Size - Free Delivery",
+    "route": null,
+    "versions": [
+      "Accessory for Model 22 Series - Standard Size"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": false,
+        "scores": {
+          "product_clarity": 0,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 1,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 8,
+        "failed_criteria": [
+          "product_clarity"
+        ],
+        "critique": "The title needs to specify what type of accessory it is (e.g., case, charger, strap) rather than just referencing the compatible model series.",
+        "verdict": "HUMAN_REVIEW"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "HUMAN_REVIEW",
+    "final_title": null,
+    "model_calls": 2,
+    "input_tokens": 785,
+    "output_tokens": 172,
+    "total_tokens": 957,
+    "est_cost_usd": 0.00329,
+    "model_time_s": 2.65,
+    "review_decision": "human_review",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0029",
+    "workflow": "loop",
+    "original": "Pro 9 - Ivory - 4x6 ft - Fast Shipping",
+    "route": null,
+    "versions": [
+      "Pro 9 Rug - Ivory - 4x6 ft"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 2
+        },
+        "total": 12,
+        "failed_criteria": [],
+        "critique": "Rewrite correctly drops the non-attribute 'Fast Shipping' and adds the clarifying word 'Rug', making it clear and consistent with no changes needed.",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Pro 9 Rug - Ivory - 4x6 ft",
+    "model_calls": 2,
+    "input_tokens": 793,
+    "output_tokens": 183,
+    "total_tokens": 976,
+    "est_cost_usd": 0.003416,
+    "model_time_s": 3.06,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  },
+  {
+    "title_id": "t0030",
+    "workflow": "loop",
+    "original": "Yoga Leggings - Recycled Poly Blend - Forest Green - Four Way Stretch - M",
+    "route": null,
+    "versions": [
+      "Yoga Leggings - Recycled Poly Blend, Forest Green, Four Way Stretch - Size M"
+    ],
+    "evaluations": [
+      {
+        "original_sufficient": true,
+        "scores": {
+          "product_clarity": 2,
+          "attribute_preservation": 2,
+          "readability": 2,
+          "searchability": 2,
+          "groundedness": 2,
+          "consistency": 1
+        },
+        "total": 11,
+        "failed_criteria": [],
+        "critique": "Change the trailing comma-separated attributes back into a consistent hyphen-delimited structure matching [product type] - [attributes] - [size].",
+        "verdict": "PASS"
+      }
+    ],
+    "iterations": 1,
+    "outcome": "PASS",
+    "final_title": "Yoga Leggings - Recycled Poly Blend, Forest Green, Four Way Stretch - Size M",
+    "model_calls": 2,
+    "input_tokens": 827,
+    "output_tokens": 190,
+    "total_tokens": 1017,
+    "est_cost_usd": 0.003554,
+    "model_time_s": 2.95,
+    "review_decision": "auto_accepted",
+    "workflow_wall_s": 15.9
+  }
+]
