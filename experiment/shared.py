@@ -27,7 +27,9 @@ CRITERIA = [
     "consistency",
 ]
 
-_client = anthropic.Anthropic()
+# max_retries raised from the default 2 for the 1,000-title run: concurrency
+# makes 429s likely. Infrastructure only, identical for both workflows.
+_client = anthropic.Anthropic(max_retries=6)
 
 # Every model call made during the process, in order.
 CALL_LOG: list[dict] = []
