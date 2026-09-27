@@ -33,6 +33,9 @@ _client = anthropic.Anthropic(max_retries=6)
 
 # Every model call made during the process, in order.
 CALL_LOG: list[dict] = []
+# The same records indexed by (workflow, title_id), so a finished title's calls
+# can be checkpointed to disk immediately.
+CALLS_BY_TITLE: dict[tuple, list] = {}
 
 
 # --------------------------------------------------------------------------
@@ -161,8 +164,23 @@ def fill(template: str, **kw) -> str:
 _FENCE = re.compile(r"^\s*`{3}(?:json)?\s*|\s*`{3}\s*$")
 
 
+MAX_PARSE_ATTEMPTS = 3
+
+
+class ParseFailure(RuntimeError):
+    """Raised when a call could not be parsed after MAX_PARSE_ATTEMPTS."""
+
+
+# Raw text of every unparseable response, for diagnosis. Not model calls -
+# those are already in CALL_LOG.
+PARSE_FAILURES: list[dict] = []
+
+
 def _loads(text: str):
-    return json.loads(_FENCE.sub("", text.strip()))
+    s = _FENCE.sub("", text.strip())
+    if not s:
+        raise ValueError("empty response text")
+    return json.loads(s)
 
 
 def _call(prompt_name: str, user: str, ctx: dict) -> str:
@@ -177,7 +195,7 @@ def _call(prompt_name: str, user: str, ctx: dict) -> str:
     )
     u = resp.usage
     text = "".join(b.text for b in resp.content if b.type == "text")
-    CALL_LOG.append(
+    rec = (
         {
             **ctx,
             "prompt": prompt_name,
@@ -190,21 +208,39 @@ def _call(prompt_name: str, user: str, ctx: dict) -> str:
             "latency_s": round(time.time() - t0, 3),
         }
     )
+    CALL_LOG.append(rec)
+    CALLS_BY_TITLE.setdefault((ctx.get("workflow"), ctx.get("title_id")), []).append(rec)
     return text
 
 
 def call_json(prompt_name: str, user: str, ctx: dict):
-    """Call the model and parse JSON. One retry, logged as its own model call."""
-    text = _call(prompt_name, user, ctx)
-    try:
-        return _loads(text)
-    except (json.JSONDecodeError, ValueError):
-        pass
-    retry_user = user + (
-        "\n\nYour previous response was not valid JSON. Respond with the JSON "
-        "object only, with no surrounding text."
+    """Call the model and parse JSON, retrying up to MAX_PARSE_ATTEMPTS.
+
+    Every attempt is logged as a real model call with real tokens, identically
+    for both workflows. Raises ParseFailure if all attempts fail; the caller
+    decides what to do, so one bad response cannot abort a whole run.
+    """
+    attempt_user = user
+    last = ""
+    for attempt in range(1, MAX_PARSE_ATTEMPTS + 1):
+        name = prompt_name if attempt == 1 else f"{prompt_name}_retry{attempt - 1}"
+        text = _call(name, attempt_user, ctx)
+        try:
+            return _loads(text)
+        except (json.JSONDecodeError, ValueError) as exc:
+            last = text
+            PARSE_FAILURES.append(
+                {**ctx, "prompt": name, "attempt": attempt,
+                 "error": str(exc), "raw": text[:500]}
+            )
+            attempt_user = user + (
+                "\n\nYour previous response was not valid JSON. Respond with the "
+                "JSON object only - no surrounding text, no markdown fences, no "
+                "explanation."
+            )
+    raise ParseFailure(
+        f"{prompt_name}: {MAX_PARSE_ATTEMPTS} attempts failed; last raw={last[:200]!r}"
     )
-    return _loads(_call(prompt_name + "_retry", retry_user, ctx))
 
 
 # --------------------------------------------------------------------------

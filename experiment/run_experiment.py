@@ -12,6 +12,7 @@ import argparse
 import json
 import statistics
 import sys
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -121,11 +122,12 @@ def summarise(calls: list[dict], results: list[dict], workflow: str) -> dict:
         "input_tokens": sum(x["input_tokens"] for x in c),
         "output_tokens": sum(x["output_tokens"] for x in c),
         "total_tokens": sum(x["total_tokens"] for x in c),
-        "retry_calls": sum(1 for x in c if x["prompt"].endswith("_retry")),
+        "retry_calls": sum(1 for x in c if "_retry" in x["prompt"]),
         "titles": n,
         "pass": sum(1 for x in r if x["outcome"] == "PASS"),
         "human_review": sum(1 for x in r if x["outcome"] == "HUMAN_REVIEW"),
         "fail_cap": sum(1 for x in r if x["outcome"] == "FAIL_CAP"),
+        "errors": sum(1 for x in r if x["outcome"] == "ERROR"),
         "avg_iterations": round(sum(x["iterations"] for x in r) / n, 2) if n else 0,
         "avg_calls_per_title": round(len(c) / n, 2) if n else 0,
         "cost_usd": round(cost(sum(x["input_tokens"] for x in c),
@@ -187,37 +189,74 @@ def main() -> int:
         shared.CALL_LOG.clear()
         print(f"\n=== run {run_id}/{n_runs} ===")
 
+        out = base / (f"smoke_run_{run_id}" if args.smoke else f"run_{run_id}")
+        out.mkdir(parents=True, exist_ok=True)
+        ckpt = out / "progress.jsonl"
+
+        # Resume: anything already paid for is never paid for twice.
+        cached: dict[tuple, dict] = {}
+        if ckpt.exists():
+            for line in ckpt.read_text(encoding="utf-8").splitlines():
+                if not line.strip():
+                    continue
+                rec = json.loads(line)
+                cached[(rec["result"]["workflow"], rec["result"]["title_id"])] = rec
+            if cached:
+                print(f"  resuming: {len(cached)} title-workflows already done, skipping them")
+
         verbose = len(clean) <= 20
-        results = []
+        results, calls = [], []
         wall = {}
+        lock = threading.Lock()
+        ck = ckpt.open("a", encoding="utf-8")
+
         for wf, mod in (("loop", loop_workflow), ("graph", graph_workflow)):
             t0 = time.time()
             done = [0]
 
             def one(item, mod=mod, wf=wf):
-                r = mod.run_title(item, run_id)
-                done[0] += 1
+                key = (wf, item["id"])
+                if key in cached:
+                    rec = cached[key]
+                    return rec["result"], rec["calls"]
+                try:
+                    r = mod.run_title(item, run_id)
+                except Exception as exc:  # one bad title must not abort the run
+                    r = {"title_id": item["id"], "workflow": wf, "original": item["title"],
+                         "route": None, "versions": [], "evaluations": [], "iterations": 0,
+                         "outcome": "ERROR", "final_title": None, "error": repr(exc)}
+                cs = shared.CALLS_BY_TITLE.get(key, [])
+                with lock:
+                    ck.write(json.dumps({"result": r, "calls": cs}) + "\n")
+                    ck.flush()
+                    done[0] += 1
+                    n = done[0]
                 if verbose:
                     print(f"  {wf:<5} {item['id']}: {r['outcome']:<12}"
                           f" route={str(r.get('route')):<8} iterations={r['iterations']}")
-                elif done[0] % 100 == 0:
-                    print(f"  {wf}: {done[0]}/{len(clean)}  ({time.time() - t0:.0f}s)")
-                return r
+                elif n % 100 == 0:
+                    print(f"  {wf}: {n}/{len(clean)}  ({time.time() - t0:.0f}s)")
+                return r, cs
 
             with ThreadPoolExecutor(max_workers=args.workers) as ex:
-                results.extend(ex.map(one, clean))
+                for r, cs in ex.map(one, clean):
+                    results.append(r)
+                    calls.extend(cs)
             wall[wf] = round(time.time() - t0, 1)
-            print(f"  {wf} done in {wall[wf]}s")
+            errs = sum(1 for r in results if r["workflow"] == wf and r["outcome"] == "ERROR")
+            print(f"  {wf} done in {wall[wf]}s" + (f"  ({errs} errored)" if errs else ""))
 
-        calls = list(shared.CALL_LOG)
+        ck.close()
+        if shared.PARSE_FAILURES:
+            (out / "parse_failures.json").write_text(
+                json.dumps(shared.PARSE_FAILURES, indent=2), encoding="utf-8")
+            print(f"  {len(shared.PARSE_FAILURES)} unparseable responses -> parse_failures.json")
         enrich(results, calls, wall)
         audit_agg = audit.audit_results(results, labels)
         for wf in WORKFLOWS:
             a = audit_agg.get(wf, {})
             print(f"  {wf} groundedness audit: {a.get('ungrounded', 0)}/{a.get('produced', 0)}"
                   f" titles contain an invented word")
-        out = base / (f"smoke_run_{run_id}" if args.smoke else f"run_{run_id}")
-        out.mkdir(exist_ok=True)
         for wf in WORKFLOWS:
             (out / f"{wf}_results.json").write_text(
                 json.dumps([r for r in results if r["workflow"] == wf], indent=2),
@@ -274,6 +313,7 @@ def write_comparison(
         ("HUMAN_REVIEW", "human_review", 1),
         ("FAIL_CAP", "fail_cap", 1),
         ("JSON retry calls", "retry_calls", 1),
+        ("Errored titles", "errors", 1),
         ("Model time (s)", "model_time_s", 1),
         ("Wall clock (s)", "wall_s", 1),
     ]
@@ -328,7 +368,8 @@ def write_comparison(
         counts = {r: 0 for r in graph_workflow.ROUTES}
         for r in per_run:
             for res in r["results"]:
-                if res["workflow"] == "graph" and labels.get(res["title_id"]) == cat:
+                if (res["workflow"] == "graph" and labels.get(res["title_id"]) == cat
+                        and res.get("route") in counts):
                     counts[res["route"]] += 1
                     total += 1
                     if res["route"] == cat:
@@ -350,6 +391,8 @@ def write_comparison(
     for r in per_run:
         for res in r["results"]:
             if res["workflow"] != "graph":
+                continue
+            if res.get("outcome") == "ERROR":
                 continue
             pred = res["route"] == "UNCLEAR"
             act = labels.get(res["title_id"]) == "UNCLEAR"
