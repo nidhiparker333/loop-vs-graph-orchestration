@@ -1,34 +1,46 @@
-# Next session: run Condition B
+# State and next steps
 
-Everything is prepared and committed. Condition B has not been run.
+## Done
 
-## One command
+- **10-title pilot** — three runs. `experiment/FINDINGS.md` (kept unedited,
+  marked superseded).
+- **1,000-title run**, Condition A (`PASS_TOTAL = 9`) — one run, 4,495 calls,
+  $7.49. `experiment/FINDINGS_SCALED.md`, raw data in
+  `experiment/results/condition_scaled/`.
 
-In PowerShell, from `C:\LoopAndGraphEngineering`, with the key set in that
-session (`$env:ANTHROPIC_API_KEY = "sk-ant-..."`):
+## Not run
 
-    .\.venv\Scripts\python.exe experiment\run_experiment.py --condition b --pass-total 12
+**Condition B** — same everything, `PASS_TOTAL = 12` instead of 9, as a
+quality-threshold sensitivity test. Preregistered in
+`experiment/CONDITION_B_PREREGISTRATION.md`, written before any Condition B run.
 
-Estimated ~$0.55 for the three runs, a few minutes. Writes to
-`experiment\results\condition_b\`. Condition A is not touched.
+On the 1,000-title dataset, with the key set in that PowerShell session:
 
-Optional cheap check first:
+    .\.venv\Scripts\python.exe experiment\run_experiment.py --dataset titles_1000.json --runs 1 --condition b --pass-total 12
 
-    .\.venv\Scripts\python.exe experiment\run_experiment.py --condition b --pass-total 12 --smoke
+Expect more than $7.49, since a stricter threshold means more revision rounds.
+Writes to `experiment\results\condition_b\`. Nothing existing is touched. A run
+checkpoints per title, so re-running the same command after a crash resumes
+without re-paying.
 
-## State
+## Open questions a reviewer or a later session might take up
 
-- Condition A: run, analysed, committed. Frozen. `experiment/FINDINGS.md`.
-- Condition B: preregistered in `experiment/CONDITION_B_PREREGISTRATION.md`,
-  committed before running. Code supports it via `--pass-total` / `--condition`.
-- The ~39% break-even is scoped to Condition A with its five assumptions listed,
-  including that the loop performed exactly one rewrite attempt per title.
+1. **A second run at n=1,000** would give the run-to-run variance estimate the
+   current result lacks. About $7.50.
+2. **Varying the ambiguous share** (10 / 30 / 50%) would measure the token
+   break-even curve directly instead of deriving it from two points. Note the
+   per-title costs are already recorded per category, so much of this can be
+   re-derived from saved data at no cost.
+3. **The audit's `STRUCTURAL` allowlist** is a judgement call that materially
+   moves the counts. Worth a sensitivity check — also free, it runs over saved
+   results.
+4. **Holding the prompts constant** between the two workflows would let the
+   comparison say something causal about routing. The current design cannot.
 
-## After the run
+## Free checks
 
-1. Compare `results/condition_b/comparison.md` against Condition A side by side.
-2. Report both. Neither is the "real" one.
-3. Iteration counts are an outcome, not a target. Condition B is a
-   quality-threshold sensitivity test, not an attempt to make the loop iterate.
-4. Then, if wanted: the LinkedIn post and the comparison visual. Neither has
-   been started, by design.
+These make no API calls:
+
+    .\.venv\Scripts\python.exe experiment\test_run_state.py
+    .\.venv\Scripts\python.exe experiment\generate_titles.py --report
+    .\.venv\Scripts\python.exe experiment\audit.py experiment\results\condition_scaled\run_1

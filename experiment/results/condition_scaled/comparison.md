@@ -69,74 +69,78 @@ Binary accuracy: 978/999 (97.9%)
 - Missed ambiguous (sent to a rewrite anyway): 0
 - Over-routed to human (work the loop did): 21 — inspect these; they inflate the graph's apparent saving.
 
-## Deterministic groundedness audit
+## Deterministic groundedness check
 
 No model involved. A rewritten title may reorder, drop, recase or
-repunctuate the input's words; introducing a new content word is a
-fabrication. Conservative: few false positives, some real misses.
+repunctuate the input's words; a new content word that cannot be
+traced to the input is flagged. These are POSSIBLE unsupported
+additions, not confirmed errors: some flags are harmless wording
+changes, and an unsupported claim that introduces no new word is
+not detected.
 
 | Metric | LOOP | GRAPH |
 |---|---|---|
 | Titles produced (not routed to human) | 699 | 677 |
-| Containing an invented word | 59 | 30 |
-| ...and PASSed the rubric anyway | 59 | 30 |
+| Flagged: contains an untraceable word | 59 | 30 |
+| ...of those, passed the model rubric | 59 | 30 |
 | Ambiguous inputs given a title | 5 | 0 |
-| ...of those, ungrounded | 3 | 0 |
-| **Fabrication rate** | 8.4% | 4.4% |
+| ...of those, flagged | 3 | 0 |
+| **Audit-flagged rate** | 8.4% | 4.4% |
 
-### LOOP — flagged examples
+### LOOP - flagged examples (possible unsupported additions)
 
-- **t0026** (MAJOR) invented '2700K' - PASS, rubric 10/12, groundedness 2
+- **t0026** (MAJOR) added '2700K' - PASS, rubric 10/12, groundedness 2
   - in:  `LB Frosted Glass Forest Green 2700 LED Bulb`
   - out: `LED Bulb, LB Frosted Glass, Forest Green, 2700K`
-- **t0029** (UNCLEAR) invented 'Rug' - PASS, rubric 11/12, groundedness 2
+- **t0029** (UNCLEAR) added 'Rug' - PASS, rubric 11/12, groundedness 2
   - in:  `Pro 9 - Ivory - 4x6 ft - Fast Shipping`
   - out: `Pro 9 Rug - Ivory - 4x6 ft`
-- **t0043** (MAJOR) invented 'Proof', 'Double', 'Wall', 'Sweat', 'Proof' - PASS, rubric 11/12, groundedness 2
+- **t0043** (MAJOR) added 'Proof', 'Double', 'Wall', 'Sweat', 'Proof' - PASS, rubric 11/12, groundedness 2
   - in:  `IWB Tritan Blush Pink Leak Doub Swea Insulated Water Bottle`
   - out: `Insulated Water Bottle - Tritan, Blush Pink, Leak Proof, Double Wall, Sweat Proof, IWB`
-- **t0047** (MAJOR) invented 'Vacuum', 'Insulated', 'Spill-Proof', 'Lid' - PASS, rubric 12/12, groundedness 2
+- **t0047** (MAJOR) added 'Vacuum', 'Insulated', 'Spill-Proof', 'Lid' - PASS, rubric 12/12, groundedness 2
   - in:  `TT Stainless Steel Sky Blue Cup Spil Vacu Travel Tumbler`
   - out: `Stainless Steel Vacuum Insulated Travel Tumbler with Spill-Proof Lid, Sky Blue`
-- **t0074** (MAJOR) invented 'Included' - PASS, rubric 11/12, groundedness 2
+- **t0074** (MAJOR) added 'Included' - PASS, rubric 11/12, groundedness 2
   - in:  `Super Soft Versatile Extra Durable Resistance Band Set Natural Latex Forest Green Snap Resistant Door Anchor Comfortable`
   - out: `Resistance Band Set - Natural Latex, Snap Resistant, Extra Durable, Super Soft, Comfortable, Forest Green - Door Anchor Included`
-- **t0093** (MINOR) invented 'Included' - PASS, rubric 12/12, groundedness 2
+- **t0093** (MINOR) added 'Included' - PASS, rubric 12/12, groundedness 2
   - in:  `resistance band set natural latex lavender 5 levels carry bag snap resistant`
   - out: `Resistance Band Set - Natural Latex, Lavender, Snap Resistant, Carry Bag Included - 5 Levels`
-- **t0160** (MINOR) invented 'Included' - PASS, rubric 12/12, groundedness 2
+- **t0160** (MINOR) added 'Included' - PASS, rubric 12/12, groundedness 2
   - in:  `5 Levels Carry Bag Snap Resistant 4 Pack Terracotta Resistance Band Set Natural Latex`
   - out: `Resistance Band Set Natural Latex Terracotta Snap Resistant 5 Levels - 4 Pack Carry Bag Included`
-- **t0186** (MAJOR) invented 'Finish' - PASS, rubric 10/12, groundedness 2
+- **t0186** (MAJOR) added 'Finish' - PASS, rubric 10/12, groundedness 2
   - in:  `Floor Lamp for home and travel use with Brushed Brass construction in Slate Grey featuring Weighted Base available in 58"`
   - out: `Floor Lamp with Brushed Brass Construction, Slate Grey Finish, Weighted Base - 58"`
 
-### GRAPH — flagged examples
+### GRAPH - flagged examples (possible unsupported additions)
 
-- **t0026** (MAJOR) invented '2700K' - PASS, rubric 12/12, groundedness 2
+- **t0026** (MAJOR) added '2700K' - PASS, rubric 12/12, groundedness 2
   - in:  `LB Frosted Glass Forest Green 2700 LED Bulb`
   - out: `LB LED Bulb Frosted Glass Forest Green 2700K`
-- **t0043** (MAJOR) invented 'Double', 'Wall', 'Proof' - PASS, rubric 12/12, groundedness 2
+- **t0043** (MAJOR) added 'Double', 'Wall', 'Proof' - PASS, rubric 12/12, groundedness 2
   - in:  `IWB Tritan Blush Pink Leak Doub Swea Insulated Water Bottle`
   - out: `Insulated Water Bottle Tritan Double Wall Leak Proof Blush Pink`
-- **t0047** (MAJOR) invented 'Vacuum' - PASS, rubric 12/12, groundedness 2
+- **t0047** (MAJOR) added 'Vacuum' - PASS, rubric 12/12, groundedness 2
   - in:  `TT Stainless Steel Sky Blue Cup Spil Vacu Travel Tumbler`
   - out: `TT Stainless Steel Vacuum Travel Tumbler Cup - Sky Blue`
-- **t0223** (MAJOR) invented 'Weighted', 'Sturdy' - PASS, rubric 11/12, groundedness 2
+- **t0223** (MAJOR) added 'Weighted', 'Sturdy' - PASS, rubric 11/12, groundedness 2
   - in:  `CSP Sisal Rope Lavender Weig Incl Stur Cat Scratching Post`
   - out: `Cat Scratching Post with Sisal Rope, Lavender, Weighted, Sturdy`
-- **t0273** (MAJOR) invented 'Knurl' - PASS, rubric 12/12, groundedness 2
+- **t0273** (MAJOR) added 'Knurl' - PASS, rubric 12/12, groundedness 2
   - in:  `AD Cast Iron Terracotta Quic Knur Adjustable Dumbbell`
   - out: `Cast Iron Adjustable Dumbbell - Terracotta, Quick Knurl, AD`
-- **t0295** (MINOR) invented 'Resistant' - PASS, rubric 12/12, groundedness 2
+- **t0295** (MINOR) added 'Resistant' - PASS, rubric 12/12, groundedness 2
   - in:  `Pet  Water  Fountain  BPA Free Plastic  Rust  Ultra Quiet Pump  50oz  Set of 4`
   - out: `Pet Water Fountain, BPA Free Plastic, Rust Resistant, Ultra Quiet Pump, 50oz, Set of 4`
-- **t0331** (MAJOR) invented 'Ultra' - PASS, rubric 11/12, groundedness 2
+- **t0331** (MAJOR) added 'Ultra' - PASS, rubric 11/12, groundedness 2
   - in:  `PWF Ceramic Mustard Carb LED Ultr Pet Water Fountain`
   - out: `PWF Ceramic Pet Water Fountain, Mustard, LED, Ultra Carb`
-- **t0347** (MAJOR) invented 'Stain', 'Resistant' - PASS, rubric 12/12, groundedness 2
+- **t0347** (MAJOR) added 'Stain', 'Resistant' - PASS, rubric 12/12, groundedness 2
   - in:  `AR Low Pile Polypropylene Olive Stai Pet Non Area Rug`
   - out: `AR Low Pile Polypropylene Area Rug - Olive, Pet Stain Resistant`
+
 
 ## Orchestration complexity
 

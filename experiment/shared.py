@@ -176,6 +176,20 @@ class ParseFailure(RuntimeError):
 PARSE_FAILURES: list[dict] = []
 
 
+def reset_run_state() -> None:
+    """Clear every per-run accumulator. Must be called at the start of each run.
+
+    CALL_LOG, CALLS_BY_TITLE and PARSE_FAILURES all accumulate for the life of
+    the process. Clearing only CALL_LOG leaves the other two carrying the
+    previous run's records, which would let run 2 attribute run 1's calls and
+    parse failures to itself. Resetting all three together is the only safe
+    form; keep them in one function so a future accumulator cannot be missed.
+    """
+    CALL_LOG.clear()
+    CALLS_BY_TITLE.clear()
+    PARSE_FAILURES.clear()
+
+
 def _loads(text: str):
     s = _FENCE.sub("", text.strip())
     if not s:

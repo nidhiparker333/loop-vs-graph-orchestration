@@ -1,13 +1,22 @@
-"""Deterministic groundedness audit. No model involved.
+"""Deterministic groundedness check. No model involved.
 
-The experiment uses the same model to generate titles and to score them, and
-that evaluator has been observed both catching an invented product noun and
-praising one. So this check does not ask a model anything: a rewritten title
-may reorder, drop, recase or repunctuate the input's words, but it may not
-introduce a new content word. Anything it introduces is flagged.
+The same model generates titles and scores them, and that evaluator has been
+observed both catching an untraceable product noun and praising one. So this
+check does not ask a model anything: a rewritten title may reorder, drop,
+recase or repunctuate the input's words, and a content word that cannot be
+traced back to the input is flagged.
 
-Conservative by design - it is meant to have very few false positives, at the
-cost of missing some real fabrications:
+This is a HEURISTIC FOR POSSIBLE UNSUPPORTED ADDITIONS, not a validated measure
+of factual error:
+
+  * a flag is not a confirmed error - "Slate Grey" -> "Slate Grey Finish" adds
+    a word that asserts very little, and is still flagged
+  * an unsupported claim that introduces no new word, such as a reordering that
+    changes meaning, is invisible to this check
+  * the STRUCTURAL allowlist below is a judgement call that materially moves
+    the counts
+
+Conservative by design - few false positives, at the cost of real misses:
 
   * comparison is on letters and digits only, so "Slip-On" == "slip on" and
     "32oz" == "32 oz" never flag
@@ -36,7 +45,7 @@ STOPWORDS = {
 # Unit and measure labels. Writing "Size XS" where the input said "XS", or
 # "12 inch" where it said 12", labels an existing attribute rather than
 # asserting a new one. Allowlisting these keeps the check conservative: it
-# under-reports fabrication rather than inflating it with formatting noise.
+# under-reports rather than inflating the count with formatting noise.
 STRUCTURAL = {
     "size", "sizes", "pack", "count", "set", "piece", "pieces", "pc", "pcs",
     "color", "colors", "colour", "colours", "inch", "inches", "foot", "feet",
@@ -52,7 +61,11 @@ def _norm(s: str) -> str:
 
 
 def invented_words(original: str, output: str) -> list[str]:
-    """Content words present in the output but not derivable from the input."""
+    """Content words in the output that cannot be traced to the input.
+
+    Returns candidates for review, not confirmed errors. See the module
+    docstring for what this misses and what it over-flags.
+    """
     if not output:
         return []
     hay = _norm(original)
@@ -112,18 +125,21 @@ def audit_results(results: list[dict], labels: dict) -> dict:
 
 def render(agg: dict, workflows=("loop", "graph")) -> list[str]:
     w: list[str] = []
-    w.append("## Deterministic groundedness audit\n")
+    w.append("## Deterministic groundedness check\n")
     w.append("No model involved. A rewritten title may reorder, drop, recase or")
-    w.append("repunctuate the input's words; introducing a new content word is a")
-    w.append("fabrication. Conservative: few false positives, some real misses.\n")
+    w.append("repunctuate the input's words; a new content word that cannot be")
+    w.append("traced to the input is flagged. These are POSSIBLE unsupported")
+    w.append("additions, not confirmed errors: some flags are harmless wording")
+    w.append("changes, and an unsupported claim that introduces no new word is")
+    w.append("not detected.\n")
     w.append("| Metric | " + " | ".join(wf.upper() for wf in workflows) + " |")
     w.append("|---" * (len(workflows) + 1) + "|")
     rows = [
         ("Titles produced (not routed to human)", "produced"),
-        ("Containing an invented word", "ungrounded"),
-        ("...and PASSed the rubric anyway", "approved_ungrounded"),
+        ("Flagged: contains an untraceable word", "ungrounded"),
+        ("...of those, passed the model rubric", "approved_ungrounded"),
         ("Ambiguous inputs given a title", "unclear_produced"),
-        ("...of those, ungrounded", "unclear_ungrounded"),
+        ("...of those, flagged", "unclear_ungrounded"),
     ]
     for label, key in rows:
         w.append(f"| {label} | " + " | ".join(str(agg.get(wf, {}).get(key, 0)) for wf in workflows) + " |")
@@ -132,15 +148,15 @@ def render(agg: dict, workflows=("loop", "graph")) -> list[str]:
         a = agg.get(wf, {})
         p, u = a.get("produced", 0), a.get("ungrounded", 0)
         rate.append(f"{u / p * 100:.1f}%" if p else "-")
-    w.append("| **Fabrication rate** | " + " | ".join(rate) + " |")
+    w.append("| **Audit-flagged rate** | " + " | ".join(rate) + " |")
     w.append("")
     for wf in workflows:
         ex = agg.get(wf, {}).get("examples", [])
         if not ex:
             continue
-        w.append(f"### {wf.upper()} — flagged examples\n")
+        w.append(f"### {wf.upper()} - flagged examples (possible unsupported additions)\n")
         for e in ex:
-            w.append(f"- **{e['title_id']}** ({e['label']}) invented "
+            w.append(f"- **{e['title_id']}** ({e['label']}) added "
                      f"{', '.join(repr(x) for x in e['invented'])} - "
                      f"{e['outcome']}, rubric {e['rubric_total']}/12, "
                      f"groundedness {e['rubric_groundedness']}")

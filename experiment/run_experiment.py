@@ -186,7 +186,11 @@ def main() -> int:
     per_run = []
 
     for run_id in range(1, n_runs + 1):
-        shared.CALL_LOG.clear()
+        # Clears CALL_LOG, CALLS_BY_TITLE and PARSE_FAILURES together. Resuming
+        # from a checkpoint relies on this too: cached calls are read from
+        # progress.jsonl, so the in-memory index must start empty or a resumed
+        # run would mix cached records with fresh ones.
+        shared.reset_run_state()
         print(f"\n=== run {run_id}/{n_runs} ===")
 
         out = base / (f"smoke_run_{run_id}" if args.smoke else f"run_{run_id}")
@@ -414,6 +418,38 @@ def write_comparison(
 
     # ---- deterministic groundedness audit ----
     lines.extend(audit.render(per_run[0].get("audit", {}), WORKFLOWS))
+
+    # ---- paired comparison on titles both workflows accepted ----
+    by_id: dict = {}
+    for r in per_run[0]["results"]:
+        by_id.setdefault(r["title_id"], {})[r["workflow"]] = r
+    paired = [v for v in by_id.values()
+              if len(v) == len(WORKFLOWS)
+              and all(x["outcome"] == "PASS" for x in v.values())]
+    if paired:
+        w("## Paired comparison: titles every workflow accepted\n")
+        w("Same inputs, all workflows produced a title, so none is credited for")
+        w("declining work. Flags are possible unsupported additions, not")
+        w("confirmed errors.\n")
+        w("| Metric | " + " | ".join(wf.upper() for wf in WORKFLOWS) + " |")
+        w("|---" * (len(WORKFLOWS) + 1) + "|")
+        w(f"| Titles | " + " | ".join(str(len(paired)) for _ in WORKFLOWS) + " |")
+        flagged = {
+            wf: [v for v in paired if audit.invented_words(
+                v[wf]["original"], v[wf]["final_title"] or "")]
+            for wf in WORKFLOWS
+        }
+        w("| Audit-flagged | " + " | ".join(
+            f"{len(flagged[wf])} ({len(flagged[wf]) / len(paired) * 100:.1f}%)"
+            for wf in WORKFLOWS) + " |")
+        if len(WORKFLOWS) == 2:
+            a, b = (set(id(v) for v in flagged[wf]) for wf in WORKFLOWS)
+            w(f"| Flagged in both | {len(a & b)} | {len(a & b)} |")
+            w(f"| Flagged in this one only | {len(a - b)} | {len(b - a)} |")
+        w("")
+        w("Read alongside the accepted / human-review counts above: a workflow")
+        w("that declines more work has fewer outputs available to flag.")
+        w("")
 
     # ---- complexity ----
     w("## Orchestration complexity\n")

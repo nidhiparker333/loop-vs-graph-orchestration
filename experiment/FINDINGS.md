@@ -1,5 +1,19 @@
 # Findings
 
+> **Status: superseded pilot.** This records the first run over 10 hand-written
+> titles, three repetitions, and is kept unedited as a record of what was found
+> at that point. The 1,000-title result is in `FINDINGS_SCALED.md`.
+>
+> Two things here have since been corrected and should be read with that in
+> mind:
+> - The framing that the workflows differ only in *when* they detect ambiguity
+>   is wrong. They also differ in prompt count (3 vs 5) and in the wording of
+>   the rewrite instruction. Nothing here isolates a causal effect of routing.
+> - The derived break-even of 38.7%, extrapolated from two points at n=10, was
+>   superseded by a measured 36.0% at n=1,000.
+>
+> The numbers below are as originally recorded and have not been changed.
+
 Written after the run. The measured numbers are in `results/comparison.md`; the
 prediction made beforehand is in `PREREGISTRATION.md`, unedited.
 
