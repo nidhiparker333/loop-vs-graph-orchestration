@@ -24,3 +24,6 @@ build/
 .venv/
 __pycache__/
 *.pyc
+
+# crash-recovery checkpoint; duplicates the results JSONs
+progress.jsonl
