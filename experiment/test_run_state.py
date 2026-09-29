@@ -25,11 +25,13 @@ FAIL_TITLE = "t0003"
 
 _real_call = shared._call
 _made: list[int] = [0]
+_called_titles: set = set()
 
 
 def fake_call(prompt_name: str, user: str, ctx: dict) -> str:
     """Stand-in for shared._call: same bookkeeping, no network."""
     _made[0] += 1
+    _called_titles.add(ctx.get("title_id"))
     rec = {**ctx, "prompt": prompt_name, "input_tokens": 700, "output_tokens": 120,
            "total_tokens": 820, "cache_read_input_tokens": 0,
            "cache_creation_input_tokens": 0, "stop_reason": "end_turn",
@@ -60,6 +62,7 @@ def read(run_id: int, name: str):
 
 
 def main() -> int:
+    global FAIL_TITLE
     shared._call = fake_call
     failures: list[str] = []
 
@@ -92,14 +95,57 @@ def main() -> int:
         check(f"run {rid}: per-title call counts sum to that run's loop calls",
               tot == own, f"{tot} == {own}")
 
-    # ---- resuming must not re-pay, and must not double-count ----
+    # ---- resuming must re-pay only for work that did not complete ----
     print("\nresume from checkpoint:")
     before = _made[0]
+    _called_titles.clear()
     run(1)
-    check("resume made no model calls", _made[0] == before, f"{_made[0] - before} calls")
+    check("resume re-ran only the errored title, nothing else",
+          _called_titles == {FAIL_TITLE},
+          f"re-ran {sorted(_called_titles)}")
+    check("resume cost far less than a full run",
+          0 < (_made[0] - before) < len(c1),
+          f"{_made[0] - before} calls vs {len(c1)} for a full run")
     c1b = read(1, "calls.json")
     check("resumed run reports the same call count as the original",
           len(c1b) == len(c1), f"{len(c1b)} == {len(c1)}")
+
+    # ---- original_sufficient must be parsed strictly ----
+    print("\nstrict boolean parsing:")
+    check("the string \"false\" is False, not truthy",
+          shared.as_bool("false") is False and shared.as_bool("False") is False)
+    check("real booleans pass through",
+          shared.as_bool(True) is True and shared.as_bool(False) is False)
+    check("a missing or unrecognised value keeps the default",
+          shared.as_bool(None) is True and shared.as_bool("maybe") is True
+          and shared.as_bool("maybe", default=False) is False)
+    check('evaluate() escalates on original_sufficient: "false"',
+          shared.verdict(shared.as_bool("false"), {c: 2 for c in shared.CRITERIA})
+          == "HUMAN_REVIEW",
+          "a perfect 12/12 must still escalate")
+
+    # ---- a checkpointed ERROR must be retried, not treated as done ----
+    print("\nresume retries errored titles:")
+    shutil.rmtree(BASE, ignore_errors=True)
+    keep, FAIL_TITLE = FAIL_TITLE, "t0002"
+    run(1)
+    errs1 = [r for r in read(1, "loop_results.json") if r["outcome"] == "ERROR"]
+    check("first pass produced an errored title", len(errs1) == 1, FAIL_TITLE)
+
+    FAIL_TITLE = None                       # the transient failure clears
+    before_retry = _made[0]
+    _called_titles.clear()
+    run(1)
+    res2 = read(1, "loop_results.json")
+    errs2 = [r for r in res2 if r["outcome"] == "ERROR"]
+    check("resume re-ran the errored title", _made[0] > before_retry,
+          f"{_made[0] - before_retry} calls")
+    check("the errored title now has a real outcome", len(errs2) == 0)
+    check("resume re-ran that title and no other",
+          _called_titles == {"t0002"}, f"re-ran {sorted(_called_titles)}")
+    check("every title is still present exactly once",
+          len(res2) == N_TITLES and len({r["title_id"] for r in res2}) == N_TITLES)
+    FAIL_TITLE = keep
 
     # ---- reset_run_state clears everything ----
     print("\nreset_run_state:")

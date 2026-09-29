@@ -10,8 +10,11 @@ Two AI workflows compared on one narrow task. Please attack it.
 2. A word-level groundedness check flagged **59 of 699** loop outputs and
    **30 of 677** graph outputs as containing a possible unsupported addition.
    On the 674 titles both workflows accepted, the split is **54 vs 29**.
-3. **All 89 audit-flagged outputs passed the model rubric**, each scoring 2/2
-   on "groundedness".
+3. Over **every candidate the evaluator scored**, restricted to those it judged
+   workable: the evaluator gave full groundedness marks to **83%** of the loop's
+   71 flagged candidates and **75%** of the graph's 40. It also objected on
+   candidates the check passed (10 loop, 7 graph; 16 and 7 across all scored
+   candidates), so the disagreement is not one-directional.
 4. Token break-even for the graph on this dataset is **36% ambiguous inputs**;
    the dataset was 30%.
 
@@ -23,9 +26,11 @@ Two AI workflows compared on one narrow task. Please attack it.
 - **No fabrication rate.** The audit is a heuristic for possible unsupported
   additions, not a validated measure of factual error. Flags are not confirmed
   errors, and unsupported claims that add no new word go unflagged.
-- **No claim that the rubric detects 0% of fabrications.** What is measured is
-  narrower: on the 89 outputs the audit flagged, the rubric objected to none.
-  Outputs the audit did not flag were never independently checked.
+- **No claim that the rubric detects 0% of fabrications.** Neither instrument is
+  ground truth for the other and both miss things. An earlier version led with
+  "all 89 flagged outputs passed with groundedness 2" — true, but close to
+  circular, since the frozen PASS rule *requires* `groundedness == 2`. That is
+  now stated as such and replaced with the all-candidates measurement.
 - **No cost model for human review.** No dollar figure is assumed for a review
   or for an unsupported claim reaching a catalog.
 - Nothing about orchestration patterns in general, other tasks, or other models.
@@ -58,24 +63,30 @@ them, but the scaled run is not a preregistered test of a prior hypothesis.
 3. **The loop revised only 22 of 1,000 titles** (`avg_iterations = 1.02`). A
    thrashing loop — the case that motivates the question — is untested. Is the
    comparison meaningful without it?
-4. **The audit is the author's own construction.** It forgives plurals,
-   substrings and unit words, so it under-reports; and some flags are harmless
-   (`Slate Grey` → `Slate Grey Finish`). Does the `STRUCTURAL` allowlist let
-   real unsupported claims through? Adding it moved a 30-title sample's loop
-   rate from 30.0% to 10.0% — a large swing from one judgement call.
-5. **The dataset is synthetic and author-generated** (`generate_titles.py`). The
+4. **The audit is the author's own construction, and it was tuned on data from
+   the population it is applied to.** The `STRUCTURAL` allowlist was chosen by
+   looking at 30-title dry runs drawn from this same dataset — not a held-out
+   sample. Adding it moved that sample's loop rate from 30.0% to 10.0%, so the
+   tuning moved the numbers materially. `titles_1000.json` was then edited after
+   those dry runs (commit `cf05f15`), so the tuning set and the final dataset
+   are not identical. Does the allowlist let real unsupported claims through?
+5. **The audit ignores tokens under 3 characters**, so a changed two-digit
+   number (`9W` → `12W`, quantity 4 → 6) is invisible to it. Verified against
+   the saved run: no output introduced a number absent from its input, so it
+   did not fire here — but it is a real gap for any future run.
+6. **The dataset is synthetic and author-generated** (`generate_titles.py`). The
    `major_abbrev` style truncates words and both workflows expand them back; 20
    of the loop's 59 flags and 18 of the graph's 30 are that. Both the excluded
    and unexcluded numbers are reported — is the exclusion defensible?
-6. **The two workflows differ in several ways at once**, so the comparison
+7. **The two workflows differ in several ways at once**, so the comparison
    cannot attribute the result to routing. Is comparing whole workflows still
    useful, or does it make the result uninterpretable?
-7. **Same model generates and evaluates.** Claim 3 is a finding about how
+8. **Same model generates and evaluates.** Claim 3 is a finding about how
    unreliable that is, yet PASS and HUMAN_REVIEW counts still depend on it.
-8. **MINOR/MAJOR ground-truth labels are the author's**; the classifier
+9. **MINOR/MAJOR ground-truth labels are the author's**; the classifier
    disagreed on 181 of 999. The argument that this does not affect cost — both
    routes take 3 calls — should be checked.
-9. **The 21 graph over-routes to human review** are counted against the graph,
+10. **The 21 graph over-routes to human review** are counted against the graph,
    but no cost is attached to a human review, so the accepted/review trade-off
    is reported without being resolved. Is presenting both columns sufficient?
 

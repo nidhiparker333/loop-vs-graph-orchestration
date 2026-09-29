@@ -262,6 +262,29 @@ def call_json(prompt_name: str, user: str, ctx: dict):
 # --------------------------------------------------------------------------
 
 
+def as_bool(value, default: bool = True) -> bool:
+    """Parse a model-supplied boolean strictly.
+
+    The model sometimes returns the JSON *string* "false" rather than the
+    literal false. bool("false") is True, which would silently skip a
+    human-review exit and send an unanswerable title on to be rewritten.
+    Anything unrecognised falls back to `default`, matching the previous
+    behaviour for a missing key.
+    """
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        v = value.strip().lower()
+        if v in ("true", "yes", "y", "1"):
+            return True
+        if v in ("false", "no", "n", "0"):
+            return False
+        return default
+    if isinstance(value, (int, float)):
+        return bool(value)
+    return default
+
+
 def verdict(original_sufficient: bool, scores: dict) -> str:
     """Frozen verdict rule. Computed in code, not by the model. See rubric.md."""
     if not original_sufficient:
@@ -276,7 +299,7 @@ def evaluate(original: str, candidate: str, ctx: dict) -> dict:
     """Identical for both workflows. Sees only (original, candidate)."""
     raw = call_json("EVALUATE", fill(EVALUATE, original=original, candidate=candidate), ctx)
     scores = {c: int(raw.get("scores", {}).get(c, 0)) for c in CRITERIA}
-    suff = bool(raw.get("original_sufficient", True))
+    suff = as_bool(raw.get("original_sufficient", True))
     return {
         "original_sufficient": suff,
         "scores": scores,

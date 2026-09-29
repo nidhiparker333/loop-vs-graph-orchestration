@@ -123,6 +123,81 @@ def audit_results(results: list[dict], labels: dict) -> dict:
     return agg
 
 
+def audit_candidates(results: list[dict]) -> dict:
+    """Cross-tabulate the check against the evaluator over EVERY scored candidate.
+
+    `audit_results` only sees each title's final output. That hides the cases
+    where the evaluator did object - it objected, the candidate was revised, and
+    only the survivor reached the end. This looks at every (version, evaluation)
+    pair the evaluator actually scored, so the two checks can be compared on the
+    same population.
+
+    Two scopes are reported, because they answer different questions:
+      "all"      - every scored candidate
+      "workable" - only candidates whose evaluator judged the ORIGINAL title
+                   sufficient, i.e. cases where a rewrite was the right call
+                   at all. Escalation candidates are excluded.
+    """
+    out: dict[str, dict] = {}
+    for r in results:
+        wf = r["workflow"]
+        for scope in ("all", "workable"):
+            out.setdefault(wf, {}).setdefault(scope, {
+                "candidates": 0, "flagged": 0, "flagged_g2": 0,
+                "flagged_glt2": 0, "unflagged_glt2": 0, "unflagged_g2": 0,
+            })
+        for version, ev in zip(r.get("versions", []), r.get("evaluations", [])):
+            flagged = bool(invented_words(r["original"], version))
+            g2 = ev["scores"]["groundedness"] == 2
+            scopes = ["all"] + (["workable"] if ev.get("original_sufficient") else [])
+            for scope in scopes:
+                a = out[wf][scope]
+                a["candidates"] += 1
+                a["flagged"] += flagged
+                a["flagged_g2"] += flagged and g2
+                a["flagged_glt2"] += flagged and not g2
+                a["unflagged_glt2"] += (not flagged) and not g2
+                a["unflagged_g2"] += (not flagged) and g2
+    return out
+
+
+def render_candidates(agg: dict, workflows=("loop", "graph")) -> list[str]:
+    w: list[str] = []
+    w.append("## Check vs evaluator, over every scored candidate\n")
+    w.append("The table above covers final outputs only, which hides the cases where")
+    w.append("the evaluator did object and the candidate was revised. This covers every")
+    w.append("candidate the evaluator scored.\n")
+    w.append('"Workable" means the evaluator judged the original title sufficient to')
+    w.append("rewrite, so escalation candidates are excluded.\n")
+    for scope, title in (("workable", "Workable candidates"), ("all", "All scored candidates")):
+        w.append(f"**{title}**\n")
+        w.append("| Metric | " + " | ".join(wf.upper() for wf in workflows) + " |")
+        w.append("|---" * (len(workflows) + 1) + "|")
+        rows = [
+            ("Candidates scored", "candidates"),
+            ("Flagged by the check", "flagged"),
+            ("...evaluator still scored groundedness 2", "flagged_g2"),
+            ("...evaluator scored below 2", "flagged_glt2"),
+            ("Not flagged, evaluator scored below 2", "unflagged_glt2"),
+        ]
+        for label, key in rows:
+            w.append(f"| {label} | " + " | ".join(
+                str(agg.get(wf, {}).get(scope, {}).get(key, 0)) for wf in workflows) + " |")
+        rate = []
+        for wf in workflows:
+            a = agg.get(wf, {}).get(scope, {})
+            f, g = a.get("flagged", 0), a.get("flagged_g2", 0)
+            rate.append(f"{g / f * 100:.0f}%" if f else "-")
+        w.append("| **Flagged candidates the evaluator passed on groundedness** | "
+                 + " | ".join(rate) + " |")
+        w.append("")
+    w.append("The bottom row is the disagreement rate. The row above it is the reverse")
+    w.append("case: the evaluator objecting where the check saw nothing. Both happen, so")
+    w.append("neither instrument dominates the other.")
+    w.append("")
+    return w
+
+
 def render(agg: dict, workflows=("loop", "graph")) -> list[str]:
     w: list[str] = []
     w.append("## Deterministic groundedness check\n")
@@ -185,6 +260,7 @@ def main() -> None:
             results += json.loads(f.read_text(encoding="utf-8"))
     agg = audit_results(results, labels)
     print("\n".join(render(agg)))
+    print("\n".join(render_candidates(audit_candidates(results))))
 
 
 if __name__ == "__main__":

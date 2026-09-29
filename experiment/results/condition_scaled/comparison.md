@@ -142,6 +142,42 @@ not detected.
   - out: `AR Low Pile Polypropylene Area Rug - Olive, Pet Stain Resistant`
 
 
+## Check vs evaluator, over every scored candidate
+
+The table above covers final outputs only, which hides the cases where
+the evaluator did object and the candidate was revised. This covers every
+candidate the evaluator scored.
+
+"Workable" means the evaluator judged the original title sufficient to
+rewrite, so escalation candidates are excluded.
+
+**Workable candidates**
+
+| Metric | LOOP | GRAPH |
+|---|---|---|
+| Candidates scored | 725 | 700 |
+| Flagged by the check | 71 | 40 |
+| ...evaluator still scored groundedness 2 | 59 | 30 |
+| ...evaluator scored below 2 | 12 | 10 |
+| Not flagged, evaluator scored below 2 | 10 | 7 |
+| **Flagged candidates the evaluator passed on groundedness** | 83% | 75% |
+
+**All scored candidates**
+
+| Metric | LOOP | GRAPH |
+|---|---|---|
+| Candidates scored | 1025 | 701 |
+| Flagged by the check | 115 | 40 |
+| ...evaluator still scored groundedness 2 | 71 | 30 |
+| ...evaluator scored below 2 | 44 | 10 |
+| Not flagged, evaluator scored below 2 | 16 | 7 |
+| **Flagged candidates the evaluator passed on groundedness** | 62% | 75% |
+
+The bottom row is the disagreement rate. The row above it is the reverse
+case: the evaluator objecting where the check saw nothing. Both happen, so
+neither instrument dominates the other.
+
+
 ## Orchestration complexity
 
 Three descriptive metrics, reported side by side. Deliberately not

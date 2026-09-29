@@ -204,6 +204,11 @@ def main() -> int:
                 if not line.strip():
                     continue
                 rec = json.loads(line)
+                # An ERROR is not "done" - it is a title whose work never
+                # completed. Caching it would make the failure permanent across
+                # every future resume, so leave it out and let it be retried.
+                if rec["result"].get("outcome") == "ERROR":
+                    continue
                 cached[(rec["result"]["workflow"], rec["result"]["title_id"])] = rec
             if cached:
                 print(f"  resuming: {len(cached)} title-workflows already done, skipping them")
@@ -418,6 +423,8 @@ def write_comparison(
 
     # ---- deterministic groundedness audit ----
     lines.extend(audit.render(per_run[0].get("audit", {}), WORKFLOWS))
+    lines.extend(audit.render_candidates(
+        audit.audit_candidates(per_run[0]["results"]), WORKFLOWS))
 
     # ---- paired comparison on titles both workflows accepted ----
     by_id: dict = {}

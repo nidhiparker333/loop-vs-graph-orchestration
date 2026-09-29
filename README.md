@@ -8,10 +8,23 @@ accepted 23 fewer titles, sent 22 more to human review, and had roughly half as
 many outputs flagged by a word-level groundedness check. These point in
 different directions; no winner is declared.
 
-**The finding with the widest reach is not about orchestration.** 89 outputs
-contained a content word that could not be traced to the input. All 89 passed
-the model's own rubric, every one scoring full marks on "every claim traceable
-to the original".
+**The finding with the widest reach is not about orchestration.** A word-level
+check with no model in it flagged candidates containing a content word that
+could not be traced back to the input. On candidates the evaluator judged
+workable, it scored full marks on groundedness for **83%** of the loop's flagged
+candidates and **75%** of the graph's — the very criterion it was being asked
+about.
+
+The disagreement runs both ways: the evaluator also objected on candidates the
+check passed (10 loop, 7 graph in that scope). Neither is ground truth for the
+other. But a pipeline relying only on the model's own groundedness score would
+have let most flagged candidates through.
+
+An earlier version of this README led with "all 89 flagged outputs passed the
+rubric with groundedness 2". That is true but close to circular — the frozen
+PASS rule *requires* `groundedness == 2`, so no passing title could have scored
+otherwise. The figures above are measured over every scored candidate instead,
+where the answer was not fixed in advance.
 
 → **[experiment/FINDINGS_SCALED.md](experiment/FINDINGS_SCALED.md)** — the full
 result, what it supports, and what it does not.
@@ -51,6 +64,11 @@ causal benefit of routing** — that would require holding the prompts constant.
 Both workflows share the same evaluator prompt byte-for-byte, the same rubric,
 the same PASS rule, and the same 3-attempt cap.
 
+**The graph contains the same revise loop as the loop workflow**, and the loop
+revised only 22 of 1,000 titles. So in practice this compares a routed pipeline
+against an unrouted one far more than it compares looping against branching —
+the looping machinery was nearly idle in both arms.
+
 ## Results at a glance
 
 | | loop | graph |
@@ -60,13 +78,20 @@ the same PASS rule, and the same 3-attempt cap.
 | Cost | $3.69 | $3.81 |
 | Accepted (PASS) | 699 | 676 |
 | Sent to human review | 300 | 322 |
-| Audit-flagged outputs | 59 of 699 | 30 of 677 |
+| Audit-flagged final outputs | 59 of 699 | 30 of 677 |
 | Paired: of 674 both accepted | 54 flagged | 29 flagged |
+| Flagged candidates the evaluator passed | 83% | 75% |
 | Workflow lines of code | 52 | 80 |
 
 Audit flags mark **possible unsupported additions** found by a word-level check.
-They are not confirmed errors. See
-[FINDINGS_SCALED.md §2](experiment/FINDINGS_SCALED.md).
+They are not confirmed errors, and the check misses unsupported claims that
+introduce no new word. See
+[FINDINGS_SCALED.md §1–§2](experiment/FINDINGS_SCALED.md).
+
+The paired differences are lopsided enough to rule out chance within this run
+(exact McNemar: audit flags 31 vs 6, p ≈ 4×10⁻⁵; accepted 25 vs 2, p ≈ 6×10⁻⁶).
+That says the workflows behaved differently on these 1,000 titles — not that the
+effect would repeat at the same size on another run.
 
 ## Limits
 

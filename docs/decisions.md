@@ -1,12 +1,60 @@
 # Decisions
 
-Running log of choices that are hard to reverse or easy to forget the reason for.
-
-## Open
-
-- **Stack** — undecided. Options weighed so far: Python (uv + pytest), Next.js +
-  TypeScript, Flutter. Deferred until the scope is clearer.
+Choices that are hard to reverse, or easy to forget the reason for. Newest last.
 
 ## Decided
 
-_(nothing yet)_
+**Stack: Python, standard library plus the `anthropic` SDK.** No orchestration
+framework. A graph here is a `match` on a route string and a dict of state — the
+point is that routing is not magic, and a framework would have hidden the thing
+being measured. Explicitly rejected: LangGraph, because using it for something
+called "graph orchestration" would have made the comparison about the framework.
+
+**One place touches the API.** `shared._call` is the only function that calls
+the model, so token accounting cannot drift between the two workflows. Every
+retry, including JSON parse retries, is logged there as a real call.
+
+**The verdict rule lives in code, not in the model.** `shared.verdict` applies
+the frozen thresholds; the model returns scores and a sufficiency judgement.
+This keeps the PASS rule fixed even if the model's phrasing drifts.
+
+**The rubric and the prediction were committed before the first run**
+(`242cb2c`). `PREREGISTRATION.md` and `FINDINGS.md` are never edited after the
+fact — including where the preregistration turned out to be wrong about the
+workflows differing in "exactly one thing". Corrections go in the findings and
+the README, not into the frozen record.
+
+**Instrumentation is attached post-hoc.** Per-title cost, timing and audit
+fields are computed in `run_experiment.enrich` and `audit.py` from saved
+results, so neither workflow file is touched to add measurement.
+
+**Groundedness is checked without a model.** `audit.py` exists because the same
+model generates and scores, and the scored results gave reason to distrust it on
+that criterion specifically. It is a heuristic for possible unsupported
+additions, not a validated error measure, and it is reported as such.
+
+**Runs checkpoint per title.** `progress.jsonl` makes a crash cost nothing on a
+re-run. An `ERROR` outcome is deliberately *not* treated as done, so a title
+whose work never completed is retried rather than being permanently cached as a
+failure.
+
+**The 10-title pilot is kept, not replaced.** It is labelled superseded and
+retained with its results, because it is what prompted the scaled run and the
+audit.
+
+## Open
+
+**Condition B has not been run.** `experiment/CONDITION_B_PREREGISTRATION.md`
+raises `PASS_TOTAL` from 9 to 12 as a quality-threshold sensitivity test. It is
+preregistered and unrun.
+
+**One run at n=1,000.** A second run would give the run-to-run variance estimate
+the current result lacks. About $7.50.
+
+**The audit's `STRUCTURAL` allowlist was tuned on dry runs drawn from this same
+dataset**, not a held-out sample. A sensitivity check over the saved results
+would cost nothing and has not been done.
+
+**Nothing isolates routing.** The two workflows differ in the routing step, the
+prompt count and the rewrite wording at once. Holding the prompts constant would
+be needed for a causal claim, and that run has not been designed.
