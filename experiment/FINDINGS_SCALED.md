@@ -102,17 +102,6 @@ out  Pet Water Fountain, BPA Free Plastic, Rust Resistant, ...
 
 The second reads as a colour name being carried into a durability claim.
 
-```
-in   Pro 9 - Ivory - 4x6 ft - Fast Shipping
-out  Pro 9 Rug - Ivory - 4x6 ft              →  11/12, groundedness 2, PASS
-
-in   Pet Water Fountain ... Rust ... 50oz     ("Rust" is the colour)
-out  Pet Water Fountain, BPA Free Plastic, Rust Resistant, ...
-                                              →  12/12, groundedness 2, PASS
-```
-
-The second reads as a colour name being carried into a durability claim.
-
 **What this supports:** on candidates the evaluator judged workable, it scored
 full marks on groundedness for 83% (loop) and 75% (graph) of the candidates a
 word-level check flagged as containing an untraceable word.
