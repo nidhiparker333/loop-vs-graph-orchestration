@@ -147,6 +147,53 @@ def main() -> int:
           len(res2) == N_TITLES and len({r["title_id"] for r in res2}) == N_TITLES)
     FAIL_TITLE = keep
 
+    # ---- Condition C: both arms must emit identical prompt bytes ----
+    print("\ncondition C prompt parity:")
+    import graph_workflow_c as GC
+    import loop_workflow_c as LC
+    import prompts_condition_c as P
+
+    orig = "LB Frosted Glass Forest Green 2700 LED Bulb"
+    cand = "LED Bulb, Frosted Glass, Forest Green"
+    parity = True
+    for crit in P.PRIORITY:
+        ev = {"scores": {c: (0 if c == crit else 2) for c in shared.CRITERIA},
+              "original_sufficient": True, "verdict": "REVISE"}
+        failed = P.failed_criteria(ev)
+        loop_text = P.fix_prompt(orig, cand, failed)            # loop: all failures
+        node = GC.next_node(ev)
+        graph_text = P.fix_prompt(orig, cand, [node[len("fix_"):]])  # graph: routed one
+        if loop_text != graph_text or node != f"fix_{crit}":
+            parity = False
+    check("single-failure FIX prompts are byte-identical across both arms",
+          parity, f"checked all {len(P.PRIORITY)} criteria")
+
+    check("both arms share REWRITE and EVALUATE verbatim",
+          "REWRITE" in dir(shared) and "EVALUATE" in dir(shared)
+          and not hasattr(P, "REWRITE") and not hasattr(P, "EVALUATE"),
+          "prompts_condition_c defines only FIX")
+
+    ev_multi = {"scores": dict({c: 2 for c in shared.CRITERIA},
+                               groundedness=0, readability=0),
+                "original_sufficient": True, "verdict": "REVISE"}
+    check("the graph routes to the highest-priority failure",
+          GC.next_node(ev_multi) == "fix_groundedness",
+          "groundedness outranks readability")
+    check("the loop sends every failure at once, the graph only one",
+          len(P.failed_criteria(ev_multi)) == 2
+          and P.fix_prompt(orig, cand, P.failed_criteria(ev_multi))
+          != P.fix_prompt(orig, cand, ["groundedness"]),
+          "they diverge only when more than one criterion failed")
+
+    ev_insuff = {"scores": {c: 2 for c in shared.CRITERIA},
+                 "original_sufficient": False, "verdict": "HUMAN_REVIEW"}
+    check("human review is reachable only via original_sufficient = false",
+          GC.next_node(ev_insuff) == "human_review"
+          and set(GC.NODE_NAMES) == {f"fix_{c}" for c in P.PRIORITY} | {"human_review", "done"},
+          f"{len(GC.NODE_NAMES)} nodes")
+    check("both arms use the same attempt cap",
+          LC.MAX_REWRITE_ATTEMPTS == GC.MAX_REWRITE_ATTEMPTS == 4)
+
     # ---- reset_run_state clears everything ----
     print("\nreset_run_state:")
     shared.CALL_LOG.append({"x": 1})

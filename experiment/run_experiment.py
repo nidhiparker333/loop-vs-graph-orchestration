@@ -12,6 +12,7 @@ import argparse
 import json
 import statistics
 import sys
+from collections import Counter
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -33,6 +34,10 @@ PRICING_SOURCE = "platform.claude.com/docs/en/about-claude/pricing, verified 202
 
 SMOKE_IDS = ("t01", "t05", "t08")
 WORKFLOWS = ("loop", "graph")
+
+# Set by main() so the report describes whichever variant ran.
+LOOP_MOD = loop_workflow
+GRAPH_MOD = graph_workflow
 
 
 def load_titles(dataset: str = "test_titles.json"):
@@ -158,10 +163,28 @@ def main() -> int:
         default="a",
         help="Condition label. 'a' writes to results/; anything else to results/condition_<x>/.",
     )
+    ap.add_argument(
+        "--variant",
+        default="a",
+        choices=("a", "c"),
+        help="Which workflow pair to run. 'a' is the original loop/graph; 'c' is "
+             "the prompt-matched pair in loop_workflow_c / graph_workflow_c.",
+    )
     ap.add_argument("--dataset", default="test_titles.json")
     ap.add_argument("--workers", type=int, default=12, help="Concurrent titles per workflow.")
     ap.add_argument("--limit", type=int, default=None, help="Use only the first N titles.")
     args = ap.parse_args()
+
+    loop_mod, graph_mod = loop_workflow, graph_workflow
+    if args.variant == "c":
+        import graph_workflow_c
+        import loop_workflow_c
+        import prompts_condition_c
+
+        loop_mod, graph_mod = loop_workflow_c, graph_workflow_c
+        globals()["LOOP_MOD"], globals()["GRAPH_MOD"] = loop_mod, graph_mod
+        shared.MAX_REWRITE_ATTEMPTS = prompts_condition_c.MAX_REWRITE_ATTEMPTS
+        shared.PASS_TOTAL = prompts_condition_c.PASS_TOTAL
 
     if args.pass_total is not None:
         shared.PASS_TOTAL = args.pass_total
@@ -219,7 +242,7 @@ def main() -> int:
         lock = threading.Lock()
         ck = ckpt.open("a", encoding="utf-8")
 
-        for wf, mod in (("loop", loop_workflow), ("graph", graph_workflow)):
+        for wf, mod in (("loop", loop_mod), ("graph", graph_mod)):
             t0 = time.time()
             done = [0]
 
@@ -366,60 +389,81 @@ def write_comparison(
         w(f"| {row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} |")
     w("")
 
-    # ---- classifier ----
-    w("## Graph classifier vs ground truth\n")
-    w("A graph that over-routes to human review 'saves' tokens by doing less work.")
-    w("Read this together with the token numbers.\n")
-    w("| Intended | Routed MINOR | Routed MAJOR | Routed UNCLEAR |")
-    w("|---|---|---|---|")
-    correct = total = 0
-    for cat in ("MINOR", "MAJOR", "UNCLEAR"):
-        counts = {r: 0 for r in graph_workflow.ROUTES}
+    # ---- classifier (only when a pre-classifier actually produced routes) ----
+    # Condition C has no classifier, so these tables would render as all-zero
+    # and imply a failed classifier rather than an absent one.
+    has_classifier = any(
+        r.get("route") in graph_workflow.ROUTES
+        for run in per_run for r in run["results"] if r["workflow"] == "graph"
+    )
+    if has_classifier:
+        w("## Graph classifier vs ground truth\n")
+        w("A graph that over-routes to human review 'saves' tokens by doing less work.")
+        w("Read this together with the token numbers.\n")
+        w("| Intended | Routed MINOR | Routed MAJOR | Routed UNCLEAR |")
+        w("|---|---|---|---|")
+        correct = total = 0
+        for cat in ("MINOR", "MAJOR", "UNCLEAR"):
+            counts = {r: 0 for r in graph_workflow.ROUTES}
+            for r in per_run:
+                for res in r["results"]:
+                    if (res["workflow"] == "graph" and labels.get(res["title_id"]) == cat
+                            and res.get("route") in counts):
+                        counts[res["route"]] += 1
+                        total += 1
+                        if res["route"] == cat:
+                            correct += 1
+            w(f"| {cat} | {counts['MINOR']} | {counts['MAJOR']} | {counts['UNCLEAR']} |")
+        w(f"\nClassifier agreement with intended labels: {correct}/{total}"
+          f" ({correct / total * 100:.0f}%)" if total else "")
+        fallbacks = sum(
+            1 for r in per_run for res in r["results"]
+            if res["workflow"] == "graph" and res.get("route_fallback_used")
+        )
+        w(f"\nUnrecognised classifier labels needing the MAJOR fallback: {fallbacks}")
+        w("")
+        w("### Cost-relevant accuracy: UNCLEAR vs not\n")
+        w("MINOR and MAJOR both cost 3 calls, so confusing them does not change cost.")
+        w("Only the UNCLEAR decision diverts work, so this is the split that matters")
+        w("for the token comparison.\n")
+        tp = fp = tn = fn = 0
         for r in per_run:
             for res in r["results"]:
-                if (res["workflow"] == "graph" and labels.get(res["title_id"]) == cat
-                        and res.get("route") in counts):
-                    counts[res["route"]] += 1
-                    total += 1
-                    if res["route"] == cat:
-                        correct += 1
-        w(f"| {cat} | {counts['MINOR']} | {counts['MAJOR']} | {counts['UNCLEAR']} |")
-    w(f"\nClassifier agreement with intended labels: {correct}/{total}"
-      f" ({correct / total * 100:.0f}%)" if total else "")
-    fallbacks = sum(
-        1 for r in per_run for res in r["results"]
-        if res["workflow"] == "graph" and res.get("route_fallback_used")
+                if res["workflow"] != "graph":
+                    continue
+                if res.get("outcome") == "ERROR":
+                    continue
+                pred = res["route"] == "UNCLEAR"
+                act = labels.get(res["title_id"]) == "UNCLEAR"
+                tp += pred and act
+                fp += pred and not act
+                fn += (not pred) and act
+                tn += (not pred) and not act
+        n = tp + fp + fn + tn
+        if n:
+            w("| | routed UNCLEAR | routed to work |")
+            w("|---|---|---|")
+            w(f"| intended UNCLEAR | {tp} | {fn} |")
+            w(f"| intended MINOR/MAJOR | {fp} | {tn} |")
+            w(f"\nBinary accuracy: {(tp + tn)}/{n} ({(tp + tn) / n * 100:.1f}%)")
+            w(f"- Missed ambiguous (sent to a rewrite anyway): {fn}")
+            w(f"- Over-routed to human (work the loop did): {fp}"
+              " — inspect these; they inflate the graph's apparent saving.")
+        w("")
+
+    # ---- node visits (graphs that expose a node trace) ----
+    visits = Counter(
+        n for run in per_run for r in run["results"]
+        for n in r.get("visited_nodes", [])
     )
-    w(f"\nUnrecognised classifier labels needing the MAJOR fallback: {fallbacks}")
-    w("")
-    w("### Cost-relevant accuracy: UNCLEAR vs not\n")
-    w("MINOR and MAJOR both cost 3 calls, so confusing them does not change cost.")
-    w("Only the UNCLEAR decision diverts work, so this is the split that matters")
-    w("for the token comparison.\n")
-    tp = fp = tn = fn = 0
-    for r in per_run:
-        for res in r["results"]:
-            if res["workflow"] != "graph":
-                continue
-            if res.get("outcome") == "ERROR":
-                continue
-            pred = res["route"] == "UNCLEAR"
-            act = labels.get(res["title_id"]) == "UNCLEAR"
-            tp += pred and act
-            fp += pred and not act
-            fn += (not pred) and act
-            tn += (not pred) and not act
-    n = tp + fp + fn + tn
-    if n:
-        w("| | routed UNCLEAR | routed to work |")
-        w("|---|---|---|")
-        w(f"| intended UNCLEAR | {tp} | {fn} |")
-        w(f"| intended MINOR/MAJOR | {fp} | {tn} |")
-        w(f"\nBinary accuracy: {(tp + tn)}/{n} ({(tp + tn) / n * 100:.1f}%)")
-        w(f"- Missed ambiguous (sent to a rewrite anyway): {fn}")
-        w(f"- Over-routed to human (work the loop did): {fp}"
-          " — inspect these; they inflate the graph's apparent saving.")
-    w("")
+    if visits:
+        w("## Graph node visits\n")
+        w("Every entry into a named node, across all titles.\n")
+        w("| Node | Times entered |")
+        w("|---|---|")
+        for name, count in visits.most_common():
+            w(f"| `{name}` | {count} |")
+        w("")
 
     # ---- deterministic groundedness audit ----
     lines.extend(audit.render(per_run[0].get("audit", {}), WORKFLOWS))
@@ -464,9 +508,10 @@ def write_comparison(
     w("combined into a single score.\n")
     w("| Metric | LOOP | GRAPH |")
     w("|---|---|---|")
-    w(f"| Workflow lines of code | {loc(HERE / 'loop_workflow.py')} | {loc(HERE / 'graph_workflow.py')} |")
-    w(f"| Distinct model prompts | {loop_workflow.DISTINCT_PROMPTS} | {graph_workflow.DISTINCT_PROMPTS} |")
-    w(f"| Explicit decision points | {loop_workflow.DECISION_POINTS} | {graph_workflow.DECISION_POINTS} |")
+    w(f"| Workflow lines of code | {loc(HERE / (LOOP_MOD.__name__ + '.py'))} | "
+      f"{loc(HERE / (GRAPH_MOD.__name__ + '.py'))} |")
+    w(f"| Distinct model prompts | {LOOP_MOD.DISTINCT_PROMPTS} | {GRAPH_MOD.DISTINCT_PROMPTS} |")
+    w(f"| Explicit decision points | {LOOP_MOD.DECISION_POINTS} | {GRAPH_MOD.DECISION_POINTS} |")
     w("")
     w("LOC counting method, fixed before the code was written: non-blank,")
     w("non-comment lines in the workflow file only. Shared code is excluded")
