@@ -138,24 +138,15 @@ result is uninteresting, it is reported as uninteresting.
 
 ## Predictions
 
-*To be completed by the author before the first run. Left blank deliberately —
-a prediction written after seeing any Condition C output is not a prediction.*
+Written by the author and committed before any Condition C API call. Scored
+against the measured result in `FINDINGS_C.md`, unedited either way.
 
-<!--
-Fill in below, then commit this file. Nothing calls the API until it is
-committed. Useful shapes: which arm uses more model calls, which reaches PASS
-more often, whether the graph's one-at-a-time repairs converge in fewer or more
-iterations, which nodes dominate, and whether the audit-flag rates differ.
--->
+1. **The strict threshold makes the loop actually loop:** it averages at least
+   **1.5 attempts per title**.
+2. **The graph uses more model calls and more total tokens** than the loop.
+3. **The graph reaches PASS on more titles and hits the attempt cap less often**
+   than the loop.
+4. **The graph's final outputs are audit-flagged less often** than the loop's.
+5. **HUMAN_REVIEW counts differ by 10 or fewer** between the two arms.
 
-**Model calls:**
-
-**PASS rate:**
-
-**Iterations to PASS:**
-
-**Node distribution:**
-
-**Audit flags:**
-
-**Overall:**
+Each is scored confirmed, refuted or mixed, with the numbers attached.
