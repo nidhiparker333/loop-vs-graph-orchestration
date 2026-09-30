@@ -1,0 +1,46 @@
+[
+  {
+    "run_id": 1,
+    "workflow": "loop",
+    "title_id": "t0026",
+    "route": null,
+    "iteration": 3,
+    "prompt": "EVALUATE",
+    "attempt": 1,
+    "error": "Expecting value: line 1 column 1 (char 0)",
+    "raw": "Note: \"2700\" in the original likely refers to color temperature (2700K), and \"LB\" appears to be a brand or model code.\n\n{\"original_sufficient\": true,\n  \"scores\": {\"product_clarity\": 2, \"attribute_preservation\": 2, \"readability\": 1, \"searchability\": 2, \"groundedness\": 2, \"consistency\": 1},\n  \"failed_criteria\": [\"readability\", \"consistency\"],\n  \"critique\": \"Reorder to a natural phrase like 'LB LED Bulb, Frosted Glass, Forest Green, 2700K' instead of a comma-separated attribute dump.\"}"
+  },
+  {
+    "run_id": 1,
+    "workflow": "loop",
+    "title_id": "t0026",
+    "route": null,
+    "iteration": 4,
+    "prompt": "EVALUATE",
+    "attempt": 1,
+    "error": "Expecting value: line 1 column 1 (char 0)",
+    "raw": "Looking at the original title \"LB Frosted Glass Forest Green 2700 LED Bulb\" - this identifies a product (LED bulb) with brand/model (LB), attributes (frosted glass, forest green color, 2700K color temperature). The core product is identifiable.\n\nThe rewritten title \"LED Bulb, LB, Frosted Glass, Forest Green, 2700K\" preserves all the same information but uses comma-separated format rather than a natural title structure, and adds a \"K\" unit to 2700 which is a reasonable inference (Kelvin is standa"
+  },
+  {
+    "run_id": 1,
+    "workflow": "graph",
+    "title_id": "t0016",
+    "route": "fix_groundedness",
+    "iteration": 2,
+    "prompt": "FIX",
+    "attempt": 1,
+    "error": "Expecting value: line 1 column 1 (char 0)",
+    "raw": "Looking at the original title, \"Razo\" appears to be a truncated/misspelled word (likely \"Razor\"), and \"Full\" seems to indicate size. However, \"Razor\" is not a supported claim since this is a Chef Knife, and the original has \"Razo\" which is ambiguous - I should not infer it means \"Razor\" as a feature claim, but it may be part of \"Razor Sharp\" or similar - since it's unclear, I'll exclude unsupported inferences.\n\nThe current version added \"Razor\" (spelling out \"Razo\") and \"Size\" (added to \"Full\") "
+  },
+  {
+    "run_id": 1,
+    "workflow": "graph",
+    "title_id": "t0038",
+    "route": null,
+    "iteration": 1,
+    "prompt": "EVALUATE",
+    "attempt": 1,
+    "error": "Expecting value: line 1 column 1 (char 0)",
+    "raw": "The original title is vague (\"Cream\" for what product exactly - replacement cream for what item?), but it's internally consistent and doesn't lack core identifiable info beyond what it states, so I'll treat it as sufficient given it's a self-contained descriptor (likely replacement cream cartridges/pads, but ambiguous category).\n\n{\"original_sufficient\": true,\n  \"scores\": {\"product_clarity\": 1, \"attribute_preservation\": 2, \"readability\": 2,\n             \"searchability\": 2, \"groundedness\": 2, \"con"
+  }
+]
