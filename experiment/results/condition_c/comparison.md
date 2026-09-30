@@ -41,18 +41,23 @@ Labels are ground truth, never shown to either workflow.
 
 ## Graph node visits
 
-Every entry into a named node, across all titles.
+**Executed** is how many times a node actually ran. **Planned** also
+counts the node a title was routed to when it hit the attempt cap,
+which never executed. Read the executed column.
 
-| Node | Times entered |
-|---|---|
-| `fix_consistency` | 790 |
-| `done` | 477 |
-| `human_review` | 303 |
-| `fix_attribute_preservation` | 75 |
-| `fix_searchability` | 66 |
-| `fix_groundedness` | 64 |
-| `fix_product_clarity` | 6 |
-| `fix_readability` | 6 |
+| Node | Executed | Planned |
+|---|---|---|
+| `fix_consistency` | 601 | 790 |
+| `done` | 0 | 477 |
+| `human_review` | 0 | 303 |
+| `fix_attribute_preservation` | 72 | 75 |
+| `fix_searchability` | 53 | 66 |
+| `fix_groundedness` | 54 | 64 |
+| `fix_product_clarity` | 5 | 6 |
+| `fix_readability` | 4 | 6 |
+
+Executed fix-node runs: 789.
+
 
 ## Deterministic groundedness check
 

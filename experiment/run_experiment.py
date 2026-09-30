@@ -452,17 +452,30 @@ def write_comparison(
         w("")
 
     # ---- node visits (graphs that expose a node trace) ----
-    visits = Counter(
-        n for run in per_run for r in run["results"]
-        for n in r.get("visited_nodes", [])
-    )
-    if visits:
+    # A title that stops at the attempt cap has already had its *next* node
+    # chosen and recorded, but that node never ran. Counting those inflates the
+    # busiest node. Each executed fix appends a version, so the first
+    # len(versions)-1 entries are the ones that actually ran.
+    executed, planned = Counter(), Counter()
+    for run in per_run:
+        for r in run["results"]:
+            trace = r.get("visited_nodes", [])
+            n_exec = max(len(r.get("versions", [])) - 1, 0)
+            for i, node in enumerate(trace):
+                planned[node] += 1
+                if i < n_exec:
+                    executed[node] += 1
+    if planned:
+        total_exec = sum(c for n, c in executed.items() if n.startswith("fix_"))
         w("## Graph node visits\n")
-        w("Every entry into a named node, across all titles.\n")
-        w("| Node | Times entered |")
-        w("|---|---|")
-        for name, count in visits.most_common():
-            w(f"| `{name}` | {count} |")
+        w("**Executed** is how many times a node actually ran. **Planned** also")
+        w("counts the node a title was routed to when it hit the attempt cap,")
+        w("which never executed. Read the executed column.\n")
+        w("| Node | Executed | Planned |")
+        w("|---|---|---|")
+        for name, _ in planned.most_common():
+            w(f"| `{name}` | {executed[name]} | {planned[name]} |")
+        w(f"\nExecuted fix-node runs: {total_exec}.")
         w("")
 
     # ---- deterministic groundedness audit ----

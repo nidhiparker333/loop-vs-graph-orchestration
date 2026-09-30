@@ -60,7 +60,7 @@ The distribution is strikingly bimodal:
 
 Titles either clear 12/12 on the first try or grind to the cap. Very little in
 between. That shape is itself a finding: the repair rounds rarely rescue a title
-that failed once — of the 315 loop titles that needed a second attempt, only 110
+that failed once — of the 312 loop titles that needed a second attempt, only 110
 ever reached PASS.
 
 ### 2. The graph uses more model calls and more total tokens
@@ -119,26 +119,32 @@ Ambiguous inputs caught: loop 295 of 300, graph 298 of 300.
 
 ## Graph node visits
 
-Every entry into a named node, across 1,000 titles:
+**Executed** is how many times a node actually ran. **Planned** also counts the
+node a title was routed to when it hit the attempt cap — that routing decision
+was recorded but never executed, so the planned column overstates the busiest
+node. The executed column is the real one.
 
-| node | entries |
-|---|---|
-| `fix_consistency` | **790** |
-| `done` | 477 |
-| `human_review` | 303 |
-| `fix_attribute_preservation` | 75 |
-| `fix_searchability` | 66 |
-| `fix_groundedness` | 64 |
-| `fix_product_clarity` | 6 |
-| `fix_readability` | 6 |
+| node | executed | planned |
+|---|---|---|
+| `fix_consistency` | **601** | 790 |
+| `fix_attribute_preservation` | 72 | 75 |
+| `fix_groundedness` | 54 | 64 |
+| `fix_searchability` | 53 | 66 |
+| `fix_product_clarity` | 5 | 6 |
+| `fix_readability` | 4 | 6 |
+| `done` | — | 477 |
+| `human_review` | — | 303 |
 
-**Consistency accounts for 78% of all repair routing** (790 of 1,007). The graph
-is, in practice, almost a single-purpose consistency fixer. `fix_readability`
-was entered 6 times despite readability being a common failure — it sits last in
-priority, so something else almost always outranks it.
+**789 fix-node runs executed**, of which **601 were consistency — 76%.**
+(Cross-checked: each executed fix appends one version, and the graph arm's
+versions-minus-one summed over all titles is exactly 789.)
+
+The graph is, in practice, almost a single-purpose consistency fixer.
+`fix_readability` ran 4 times despite readability being a common failure — it
+sits last in priority, so something else almost always outranks it.
 
 This matters for interpreting the whole condition: a routing policy whose top
-branch absorbs 78% of traffic is barely routing. The graph and the loop behave
+branch absorbs 76% of executed repairs is barely routing. The graph and the loop behave
 similarly here partly because the graph rarely has a meaningful choice to make.
 
 ## Audit, over every scored candidate
@@ -178,7 +184,7 @@ the first attempt; 206 ground to the cap. The middle is nearly empty.
 
 1. **One run.** No run-to-run variance estimate. The paired tests establish a
    difference within this run only, and the PASS result sits at p = 0.0505.
-2. **The routing policy barely routes.** 78% of repair traffic went to one node.
+2. **The routing policy barely routes.** 76% of executed repairs went to one node.
    A dataset with a flatter failure distribution would test branching harder;
    this one mostly tested "fix consistency, one way or the other".
 3. **The priority order is a design choice.** A different order is a different
