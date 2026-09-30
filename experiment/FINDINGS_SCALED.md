@@ -48,14 +48,14 @@ An earlier version of this document reported that **all 89 audit-flagged final
 outputs passed the model rubric with `groundedness = 2`**, and treated that as
 the headline.
 
-It is true, and it is nearly circular. The frozen PASS rule requires
-`groundedness == 2`. A title that reached PASS *could not* have scored anything
-else on that criterion — so "every flagged output that passed scored 2" is a
-restatement of the pass rule, not a measurement of the evaluator. Final outputs
+It is accurate, and it follows directly from the PASS rule, which requires
+`groundedness == 2`. A title that reached PASS could not have scored anything
+else on that criterion — so "every flagged output that passed scored 2"
+restates the pass rule rather than measuring the evaluator. Final outputs
 are also a survivor population: any candidate the evaluator did object to was
 revised, and only what survived reached the end.
 
-The figure is kept here because it was published, not because it carries weight.
+The figure is kept here because it was published, with its limitation stated.
 
 ### The population that does answer the question
 

@@ -28,9 +28,9 @@ Two AI workflows compared on one narrow task. Please attack it.
   errors, and unsupported claims that add no new word go unflagged.
 - **No claim that the rubric detects 0% of fabrications.** Neither instrument is
   ground truth for the other and both miss things. An earlier version led with
-  "all 89 flagged outputs passed with groundedness 2" — true, but close to
-  circular, since the frozen PASS rule *requires* `groundedness == 2`. That is
-  now stated as such and replaced with the all-candidates measurement.
+  "all 89 flagged outputs passed with groundedness 2" — accurate, but it
+  follows directly from the PASS rule, which requires `groundedness == 2`. That
+  is now stated as such and replaced with the all-candidates measurement.
 - **No cost model for human review.** No dollar figure is assumed for a review
   or for an unsupported claim reaching a catalog.
 - Nothing about orchestration patterns in general, other tasks, or other models.

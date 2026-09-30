@@ -21,9 +21,9 @@ other. But a pipeline relying only on the model's own groundedness score would
 have let most flagged candidates through.
 
 An earlier version of this README led with "all 89 flagged outputs passed the
-rubric with groundedness 2". That is true but close to circular — the frozen
-PASS rule *requires* `groundedness == 2`, so no passing title could have scored
-otherwise. The figures above are measured over every scored candidate instead,
+rubric with groundedness 2". That is accurate, but it follows directly from the
+PASS rule, which requires `groundedness == 2` — so no passing title could have
+scored otherwise. The figures above are measured over every scored candidate instead,
 where the answer was not fixed in advance.
 
 → **[experiment/FINDINGS_SCALED.md](experiment/FINDINGS_SCALED.md)** — the full
@@ -65,9 +65,9 @@ Both workflows share the same evaluator prompt byte-for-byte, the same rubric,
 the same PASS rule, and the same 3-attempt cap.
 
 **The graph contains the same revise loop as the loop workflow**, and the loop
-revised only 22 of 1,000 titles. So in practice this compares a routed pipeline
-against an unrouted one far more than it compares looping against branching —
-the looping machinery was nearly idle in both arms.
+revised 22 of 1,000 titles. So in practice this compares a routed pipeline
+against an unrouted one more than it compares looping against branching — the
+looping machinery was largely idle in both workflows.
 
 ## Results at a glance
 
@@ -97,9 +97,10 @@ effect would repeat at the same size on another run.
 
 Condition A could not attribute its result to routing, because its two arms also
 differed in prompt count and rewrite wording. **Condition C removes that
-confound**: both arms send the same prompt text, and the single manipulated
-variable is whether a failed evaluation is repaired all at once (loop) or one
-criterion at a time by a routed node graph (graph). `PASS_TOTAL = 12`, 4-attempt
+confound**: the two workflows shared the same prompt templates — rewrite,
+evaluation, and the per-criterion fix instructions. They differed after
+evaluation. The graph fixed the highest-priority failed criterion, one at a
+time; the loop addressed all failed criteria together. `PASS_TOTAL = 12`, 4-attempt
 cap, 1,000 titles, $13.34.
 
 | | loop | graph |
@@ -110,19 +111,21 @@ cap, 1,000 titles, $13.34.
 | FAIL_CAP | 194 | **218** |
 | Audit-flagged, paired on 425 both passed | 31 | 29 (p = 0.79) |
 
-**Most of Condition A's cost gap was not branching.** With prompts matched, the
-graph costs 1.6% more calls instead of 16.3% — so the earlier figure was largely
-the classifier call and the extra prompts, not the routing.
+**Most of Condition A's cost gap came from something other than branching.**
+With the prompt templates shared, the graph cost 1.6% more calls instead of
+16.3% — the earlier figure largely reflected the classifier call and the extra
+prompts rather than the routing.
 
-**Routing did not buy quality here.** The graph passed 23 fewer titles, hit the
-attempt cap 24 more times (paired p = 0.038), and produced outputs the audit
-could not distinguish from the loop's (paired p = 0.79).
+**Routing did not produce a clear quality gain here.** The graph passed 23
+fewer titles, reached the attempt cap 24 more times (paired p = 0.038), and
+produced outputs the audit could not distinguish from the loop's (paired
+p = 0.79).
 
-Of five preregistered predictions: three confirmed, one refuted, one mixed. The
-strict threshold also finally made the loop iterate — 1.76 attempts per title
-against Condition A's 1.02 — which revealed that iteration rarely rescues a
-failing title: 685 of 1,000 resolved on the first attempt and 206 ground to the
-cap, with little in between.
+Of five preregistered predictions: three supported, one not supported, one
+mixed. The strict threshold also made the loop iterate — 1.76 attempts per title
+against Condition A's 1.02 — which showed that iteration seldom recovers a title
+that failed once: 685 of 1,000 resolved on the first attempt and 206 reached the
+cap, with few in between.
 
 → **[experiment/FINDINGS_C.md](experiment/FINDINGS_C.md)** · preregistration in
 [CONDITION_C_PREREGISTRATION.md](experiment/CONDITION_C_PREREGISTRATION.md),
@@ -188,12 +191,12 @@ preregistered test of a prior hypothesis.
 `CONDITION_B_PREREGISTRATION.md` was written and committed before any Condition
 B run. Condition B has not been run.
 
-**One claim in the preregistration is wrong and has been left in place.** It
-states that the two workflows differ in "exactly one thing: *when* ambiguity is
-detected". That is inaccurate — they also differ in prompt count and in the
-wording of the rewrite instruction. The preregistration is not edited, because
-editing a preregistration after seeing results defeats its purpose. The
-corrected description is in `FINDINGS_SCALED.md` and above.
+**One statement in the preregistration was later refined, and is left in
+place.** It says the two workflows differ in "exactly one thing: *when*
+ambiguity is detected". They also differ in prompt count and in the wording of
+the rewrite instruction. The preregistration is not edited, because editing a
+preregistration after seeing results would remove the value it exists to
+provide. The fuller description is in `FINDINGS_SCALED.md` and above.
 
 `git log --reverse` shows the ordering.
 

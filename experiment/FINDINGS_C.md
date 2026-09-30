@@ -5,25 +5,26 @@ One run, 1,000 titles, `claude-sonnet-5`, thinking disabled, `PASS_TOTAL = 12`,
 `results/condition_c/`.
 
 Predictions were committed in `CONDITION_C_PREREGISTRATION.md` (`aec4b8b`)
-before any API call and are scored below unedited.
+before any API call and are scored below as written.
 
 ## What makes this different from Condition A
 
-Condition A could not attribute its result to routing: its arms differed in the
-classifier, the prompt count and the rewrite wording at once. Here **both arms
-send the same prompt text**. `REWRITE` and `EVALUATE` come from `shared.py`
-unchanged; both use one `FIX` template built from the same per-criterion
-instructions. For any evaluation with exactly one failed criterion the two arms
-emit **byte-identical prompts** — asserted in `test_run_state.py`.
+Condition A could not attribute its result to routing, because its workflows
+also differed in the classifier, the prompt count and the rewrite wording. Here the two workflows **shared the same prompt templates**: the rewrite
+template, the evaluation template, and the per-criterion fix instructions.
+`REWRITE` and `EVALUATE` come from `shared.py` unchanged, and both use one `FIX`
+template built from the same per-criterion instruction text. For any evaluation
+with exactly one failed criterion the two workflows send the same prompt text —
+asserted in `test_run_state.py`.
 
-One variable is manipulated:
+They differed after evaluation:
 
-- **Loop** — fix every failed criterion at once, re-evaluate.
-- **Graph** — route to the highest-priority failed criterion, fix only that,
-  re-evaluate.
+- **Loop** — addressed all failed criteria together, then re-evaluated.
+- **Graph** — fixed the highest-priority failed criterion, one at a time, then
+  re-evaluated.
 
 Same model, evaluator, thresholds, cap, human-review exit, and no pre-classifier
-in either arm.
+in either workflow.
 
 ## Headline
 
@@ -39,16 +40,16 @@ in either arm.
 | Mean iterations | 1.76 | 1.79 | |
 | Audit-flagged final outputs | 61 of 694 (8.8%) | 50 of 695 (7.2%) | |
 
-With the prompts held constant, **the two control flows are nearly the same
-price.** The +1.6% call gap here is a tenth of Condition A's +16.3%, which
-suggests most of that earlier gap came from the classifier call and the extra
-prompts rather than from branching.
+With the prompt templates shared, **the two control flows cost nearly the
+same.** The +1.6% call gap here is a tenth of Condition A's +16.3%, which
+indicates most of that earlier gap came from the classifier call and the extra
+prompts rather than from the branching itself.
 
 ## Prediction scoring
 
 ### 1. The strict threshold makes the loop actually loop — at least 1.5 attempts per title
 
-**CONFIRMED.** Loop mean **1.76** attempts (graph 1.79). Condition A's loop
+**Supported.** Loop mean **1.76** attempts (graph 1.79). Condition A's loop
 managed 1.02 at the 9/12 bar; 12/12 changed that decisively.
 
 The distribution is strikingly bimodal:
@@ -65,13 +66,13 @@ ever reached PASS.
 
 ### 2. The graph uses more model calls and more total tokens
 
-**CONFIRMED**, but barely. Calls +56 (+1.6%), tokens +21,724 (+1.1%), cost
+**Supported**, by a small margin. Calls +56 (+1.6%), tokens +21,724 (+1.1%), cost
 +$0.10. The direction is right; the magnitude is small enough that it would not
 survive as a practical argument.
 
 ### 3. The graph reaches PASS on more titles and hits the attempt cap less often
 
-**REFUTED, on both halves.** The graph did the opposite of each.
+**Not supported, on either half.** Each measurement went the other way.
 
 | | loop | graph |
 |---|---|---|
@@ -86,14 +87,14 @@ Paired, on the titles both arms attempted:
 - **FAIL_CAP**: 50 loop-only vs 74 graph-only, **p = 0.0384** — the graph
   genuinely hits the cap more.
 
-The mechanism is the manipulated variable doing exactly what it should: fixing
+The mechanism follows from the difference being tested: fixing
 one criterion per round costs rounds, and with only four attempts a title
 failing two or three criteria can run out of budget before the graph reaches
 them all. Repairing everything at once is simply faster at clearing a strict bar.
 
 ### 4. The graph's final outputs are audit-flagged less often
 
-**MIXED.** The unpaired rates match the prediction — loop 8.8% (61 of 694),
+**Mixed.** The unpaired rates match the prediction — loop 8.8% (61 of 694),
 graph 7.2% (50 of 695) — but the paired test does not support a real difference.
 
 On the 425 titles **both** arms passed, where the comparison is like-for-like:
@@ -111,7 +112,7 @@ difference disappears. Direction predicted correctly, effect not established.
 
 ### 5. HUMAN_REVIEW counts differ by 10 or fewer
 
-**CONFIRMED, exactly.** 303 in both arms — a difference of zero, and 298 of them
+**Supported, exactly.** 303 in both arms — a difference of zero, and 298 of them
 are the *same titles*. The shared exit behaves identically, which is what it was
 designed to do.
 
@@ -144,8 +145,9 @@ The graph is, in practice, almost a single-purpose consistency fixer.
 sits last in priority, so something else almost always outranks it.
 
 This matters for interpreting the whole condition: a routing policy whose top
-branch absorbs 76% of executed repairs is barely routing. The graph and the loop behave
-similarly here partly because the graph rarely has a meaningful choice to make.
+branch accounts for 76% of executed repairs is routing in a narrow sense. The
+graph and the loop behave similarly here partly because the graph seldom had a
+substantive choice to make.
 
 ## Audit, over every scored candidate
 
@@ -167,24 +169,25 @@ misses. Neither instrument is ground truth for the other. Raising the bar from
 
 ## What this condition establishes
 
-**Control flow alone is close to free here, and it does not buy quality.** With
-prompts held constant, one-repair-at-a-time cost 1.6% more calls, passed 23
-fewer titles, hit the cap 24 more times, and produced outputs the audit could
-not distinguish from the loop's.
+**Control flow alone was close to cost-neutral here, without a clear quality
+gain.** With the prompt templates shared, one-repair-at-a-time cost 1.6% more
+calls, passed 23 fewer titles, reached the cap 24 more times, and produced
+outputs the audit could not distinguish from the loop's.
 
-**Most of Condition A's cost gap was not branching.** +16.3% calls there versus
-+1.6% here, with the classifier and the specialised prompts removed. The earlier
-headline was mostly measuring the extra classifier call, not the routing.
+**Most of Condition A's cost gap came from something other than branching.**
++16.3% calls there versus +1.6% here, with the classifier and the specialised
+prompts removed. The earlier headline largely reflected the extra classifier
+call rather than the routing.
 
-**The strict threshold is what made the loop loop** — and it also revealed that
-iteration rarely rescues a failing title. 685 of 1,000 passed or escalated on
+**The strict threshold is what made the loop iterate** — and it also showed
+that iteration seldom recovers a title that failed once. 685 of 1,000 passed or escalated on
 the first attempt; 206 ground to the cap. The middle is nearly empty.
 
 ## Limits
 
 1. **One run.** No run-to-run variance estimate. The paired tests establish a
    difference within this run only, and the PASS result sits at p = 0.0505.
-2. **The routing policy barely routes.** 76% of executed repairs went to one node.
+2. **The routing policy concentrated most repairs on one node (76%).**
    A dataset with a flatter failure distribution would test branching harder;
    this one mostly tested "fix consistency, one way or the other".
 3. **The priority order is a design choice.** A different order is a different
@@ -209,8 +212,8 @@ the first attempt; 206 ground to the cap. The middle is nearly empty.
 
 | # | Prediction | Result |
 |---|---|---|
-| 1 | Loop averages ≥ 1.5 attempts | **Confirmed** — 1.76 |
-| 2 | Graph uses more calls and tokens | **Confirmed** — +1.6% calls, +1.1% tokens |
-| 3 | Graph passes more, caps less | **Refuted** — passes 23 fewer, caps 24 more |
+| 1 | Loop averages ≥ 1.5 attempts | **Supported** — 1.76 |
+| 2 | Graph uses more calls and tokens | **Supported** — +1.6% calls, +1.1% tokens |
+| 3 | Graph passes more, caps less | **Not supported** — passes 23 fewer, caps 24 more |
 | 4 | Graph's outputs flagged less often | **Mixed** — 7.2% vs 8.8% unpaired, but paired p = 0.791 |
-| 5 | HUMAN_REVIEW within 10 | **Confirmed** — identical at 303 |
+| 5 | HUMAN_REVIEW within 10 | **Supported** — identical at 303 |
