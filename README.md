@@ -93,6 +93,41 @@ The paired differences are lopsided enough to rule out chance within this run
 That says the workflows behaved differently on these 1,000 titles — not that the
 effect would repeat at the same size on another run.
 
+## Condition C — the same comparison with the prompts held constant
+
+Condition A could not attribute its result to routing, because its two arms also
+differed in prompt count and rewrite wording. **Condition C removes that
+confound**: both arms send the same prompt text, and the single manipulated
+variable is whether a failed evaluation is repaired all at once (loop) or one
+criterion at a time by a routed node graph (graph). `PASS_TOTAL = 12`, 4-attempt
+cap, 1,000 titles, $13.34.
+
+| | loop | graph |
+|---|---|---|
+| Model calls | 3,575 | 3,631 (+1.6%) |
+| PASS | **500** | 477 |
+| HUMAN_REVIEW | 303 | 303 |
+| FAIL_CAP | 194 | **218** |
+| Audit-flagged, paired on 425 both passed | 31 | 29 (p = 0.79) |
+
+**Most of Condition A's cost gap was not branching.** With prompts matched, the
+graph costs 1.6% more calls instead of 16.3% — so the earlier figure was largely
+the classifier call and the extra prompts, not the routing.
+
+**Routing did not buy quality here.** The graph passed 23 fewer titles, hit the
+attempt cap 24 more times (paired p = 0.038), and produced outputs the audit
+could not distinguish from the loop's (paired p = 0.79).
+
+Of five preregistered predictions: three confirmed, one refuted, one mixed. The
+strict threshold also finally made the loop iterate — 1.76 attempts per title
+against Condition A's 1.02 — which revealed that iteration rarely rescues a
+failing title: 685 of 1,000 resolved on the first attempt and 206 ground to the
+cap, with little in between.
+
+→ **[experiment/FINDINGS_C.md](experiment/FINDINGS_C.md)** · preregistration in
+[CONDITION_C_PREREGISTRATION.md](experiment/CONDITION_C_PREREGISTRATION.md),
+committed before the run.
+
 ## Limits
 
 - **One run** at n=1,000. No run-to-run variance estimate.
